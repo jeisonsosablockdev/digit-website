@@ -7,16 +7,16 @@ Este repositorio arranca con la capa de agentes, politicas, workflows, plantilla
 <!-- DOCS-AUTO:START -->
 ## Documentation Snapshot (Auto-generated)
 
-Updated: 2026-05-12 16:21:26 UTC
+Updated: 2026-05-12 17:22:21 UTC
 
 | Document | Scope | Last Updated | Last Commit |
 | --- | --- | --- | --- |
-| [`architecture.md`](./docs/architecture.md) | core | 2026-05-12 UTC | not committed |
-| [`auth-flow.md`](./docs/auth-flow.md) | frontend/auth | 2026-05-12 UTC | not committed |
-| [`authority-model.md`](./docs/authority-model.md) | core | 2026-05-12 UTC | not committed |
-| [`session-model.md`](./docs/session-model.md) | frontend/auth | 2026-05-12 UTC | not committed |
-| [`state-machine.md`](./docs/state-machine.md) | core | 2026-05-12 UTC | not committed |
-| [`threat-model.md`](./docs/threat-model.md) | core | 2026-05-12 UTC | not committed |
+| [`architecture.md`](./docs/architecture.md) | core | 2026-05-12 UTC | 2026-05-12 5e45aec |
+| [`auth-flow.md`](./docs/auth-flow.md) | frontend/auth | 2026-05-12 UTC | 2026-05-12 5e45aec |
+| [`authority-model.md`](./docs/authority-model.md) | core | 2026-05-12 UTC | 2026-05-12 5e45aec |
+| [`session-model.md`](./docs/session-model.md) | frontend/auth | 2026-05-12 UTC | 2026-05-12 5e45aec |
+| [`state-machine.md`](./docs/state-machine.md) | core | 2026-05-12 UTC | 2026-05-12 5e45aec |
+| [`threat-model.md`](./docs/threat-model.md) | core | 2026-05-12 UTC | 2026-05-12 5e45aec |
 
 ### Required Docs by Change Type
 - Core architecture: `architecture.md`, `authority-model.md`, `state-machine.md`, `threat-model.md`

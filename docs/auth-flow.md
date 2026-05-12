@@ -2,10 +2,12 @@
 
 Last Updated: 2026-05-12 UTC
 
-## Purpose
-
-Placeholder para documentar autenticacion, sesion y limites de confianza.
-
 ## Current State
 
-- No hay flujo de autenticacion implementado todavia.
+- La app inicial es un landing SSR en Next.js App Router.
+- No existe autenticacion, sesion ni panel protegido en esta fase.
+- Los CTAs visibles son de presentacion y no ejecutan login.
+
+## Notes
+
+- Cuando aparezca auth real, este documento debe registrar el flujo completo y sus limites de confianza.

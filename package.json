@@ -2,9 +2,13 @@
   "name": "digit",
   "private": true,
   "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
     "rfc:new": "node ./scripts/rfc-new.js",
     "linear:plan": "node ./scripts/linear-plan.js",
-    "validate": "npm run validate:docs-governance",
+    "validate": "npm run build && npm run validate:docs-governance",
     "validate:docs-governance": "bash ./scripts/ci/validate-doc-governance.sh",
     "knowledge:scan": "node ./scripts/knowledge/scan-recent-changes.ts",
     "knowledge:index": "node ./scripts/knowledge/build-knowledge-index.ts",
@@ -12,5 +16,19 @@
     "pr:ready": "bash ./scripts/ci/pr-ready.sh",
     "pr:metadata": "bash ./scripts/ci/pr-metadata-lint.sh",
     "pr:open": "bash ./scripts/ci/pr-open.sh"
+  },
+  "dependencies": {
+    "@types/node": "^25.7.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "autoprefixer": "^10.5.0",
+    "eslint": "^9.39.4",
+    "eslint-config-next": "^16.2.6",
+    "next": "^16.2.6",
+    "postcss": "^8.5.14",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "tailwindcss": "^3.4.19",
+    "typescript": "^6.0.3"
   }
 }
