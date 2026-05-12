@@ -1,0 +1,6 @@
+[mcp_servers.helius]
+args = ["helius-mcp@latest"]
+command = "npx"
+
+[mcp_servers.solana-mcp-server]
+url = "https://mcp.solana.com/mcp"

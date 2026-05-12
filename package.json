@@ -1,0 +1,16 @@
+{
+  "name": "digit",
+  "private": true,
+  "scripts": {
+    "rfc:new": "node ./scripts/rfc-new.js",
+    "linear:plan": "node ./scripts/linear-plan.js",
+    "validate": "npm run validate:docs-governance",
+    "validate:docs-governance": "bash ./scripts/ci/validate-doc-governance.sh",
+    "knowledge:scan": "node ./scripts/knowledge/scan-recent-changes.ts",
+    "knowledge:index": "node ./scripts/knowledge/build-knowledge-index.ts",
+    "knowledge:drift": "node ./scripts/knowledge/detect-governance-drift.ts",
+    "pr:ready": "bash ./scripts/ci/pr-ready.sh",
+    "pr:metadata": "bash ./scripts/ci/pr-metadata-lint.sh",
+    "pr:open": "bash ./scripts/ci/pr-open.sh"
+  }
+}
