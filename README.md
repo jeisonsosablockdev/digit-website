@@ -7,14 +7,15 @@ Este repositorio arranca con la capa de agentes, politicas, workflows, plantilla
 <!-- DOCS-AUTO:START -->
 ## Documentation Snapshot (Auto-generated)
 
-Updated: 2026-05-12 17:22:21 UTC
+Updated: 2026-05-14 15:40:25 UTC
 
 | Document | Scope | Last Updated | Last Commit |
 | --- | --- | --- | --- |
 | [`architecture.md`](./docs/architecture.md) | core | 2026-05-12 UTC | 2026-05-12 5e45aec |
-| [`auth-flow.md`](./docs/auth-flow.md) | frontend/auth | 2026-05-12 UTC | 2026-05-12 5e45aec |
+| [`auth-flow.md`](./docs/auth-flow.md) | frontend/auth | 2026-05-14 UTC | 2026-05-12 892af11 |
 | [`authority-model.md`](./docs/authority-model.md) | core | 2026-05-12 UTC | 2026-05-12 5e45aec |
-| [`session-model.md`](./docs/session-model.md) | frontend/auth | 2026-05-12 UTC | 2026-05-12 5e45aec |
+| [`linear-context.md`](./docs/linear-context.md) | general | not set | not committed |
+| [`session-model.md`](./docs/session-model.md) | frontend/auth | 2026-05-14 UTC | 2026-05-12 892af11 |
 | [`state-machine.md`](./docs/state-machine.md) | core | 2026-05-12 UTC | 2026-05-12 5e45aec |
 | [`threat-model.md`](./docs/threat-model.md) | core | 2026-05-12 UTC | 2026-05-12 5e45aec |
 

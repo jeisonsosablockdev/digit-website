@@ -10,6 +10,7 @@
 # Linear
 - Issue: `{{ISSUE_ID}}`
 - Owner: `{{OWNER}}`
+- Mother Issue Branch: `{{PARENT_BRANCH}}`
 
 # Integration Branch
 `{{INTEGRATION_BRANCH}}`
@@ -18,6 +19,10 @@
 | Slice | Status | Branch | Objective | Scope tecnico | Validation | PR |
 | --- | --- | --- | --- | --- | --- | --- |
 {{SLICE_ROWS}}
+
+Documentation rule:
+- Include one explicit documentation slice when the initiative is executed in slice mode.
+- The documentation slice must branch from the mother issue branch and own canonical docs, feature-note updates, and planning traceability.
 
 # Order of Execution
 {{EXECUTION_ORDER}}
