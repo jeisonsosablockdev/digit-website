@@ -10,8 +10,9 @@ Uso:
 Ejemplos:
   ./scripts/git-start.sh app initial-ui
   ./scripts/git-start.sh fix shared policy-cleanup
-  ./scripts/git-start.sh feature shared single-issue-slice-planning --mode integration --issue BRI-149
-  ./scripts/git-start.sh feature shared single-issue-slice-planning --mode slice --issue BRI-149 --slice-id S01 --slice-slug governance-policy
+  ./scripts/git-start.sh feature shared seo-performance-governance --mode integration --issue DIG-5
+  ./scripts/git-start.sh feature docs seo-performance-governance --mode slice --issue DIG-5 --slice-id S00 --slice-slug documentation --base feature/shared-seo-performance-governance-dig-5
+  ./scripts/git-start.sh feature shared seo-performance-governance --mode slice --issue DIG-5 --slice-id S01 --slice-slug governance-policy --base feature/shared-seo-performance-governance-dig-5
 USAGE
 }
 
@@ -20,7 +21,7 @@ is_branch_type() {
 }
 
 is_branch_scope() {
-  [[ "${1:-}" =~ ^(app|shared|infra|security)$ ]]
+  [[ "${1:-}" =~ ^(app|shared|docs|infra|security)$ ]]
 }
 
 slugify() {
@@ -47,8 +48,12 @@ normalize_issue_key() {
     return 0
   fi
 
-  echo "❌ Issue inválido: ${raw}. Usa formato BRI-149."
+  echo "❌ Issue inválido: ${raw}. Usa formato DIG-5."
   exit 1
+}
+
+current_branch() {
+  git branch --show-current 2>/dev/null || true
 }
 
 ensure_base_branch_available() {
@@ -126,7 +131,12 @@ else
   NORMALIZED_SLICE_ID="$(printf '%s' "${SLICE_ID}" | tr '[:upper:]' '[:lower:]')"
   NORMALIZED_SLICE_SLUG="$(slugify "${SLICE_SLUG}")"
   BRANCH="${BRANCH_PREFIX}-${NORMALIZED_ISSUE}-${NORMALIZED_SLICE_ID}-${NORMALIZED_SLICE_SLUG}"
-  BASE_BRANCH="${BASE_BRANCH:-${BRANCH_PREFIX}-${NORMALIZED_ISSUE}-integration}"
+  BASE_BRANCH="${BASE_BRANCH:-$(current_branch)}"
+
+  if [[ -z "${BASE_BRANCH}" ]]; then
+    echo "❌ No se pudo inferir la rama base actual para el slice. Usa --base <parent-branch>."
+    exit 1
+  fi
 fi
 
 ensure_base_branch_available "${BASE_BRANCH}"
