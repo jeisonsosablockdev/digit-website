@@ -9,8 +9,17 @@ Prefer one parent issue containing:
 - objective
 - scope
 - non-goals
-- integration branch
+- mother issue branch generated from Linear when available
 - slice plan table
 - execution order
 - risks
 - completion gate
+
+When Linear generates the parent branch for the mother issue, use that branch as the canonical base for slices instead of inventing a parallel manual parent branch.
+
+If the initiative runs in slice mode, include one dedicated documentation slice.
+
+That documentation slice should:
+- branch from the mother issue branch
+- carry canonical docs, feature-note updates, and planning traceability
+- remain separate from heavier implementation slices so governance/doc review stays clean
