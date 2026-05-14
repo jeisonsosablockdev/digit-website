@@ -4,6 +4,7 @@
 - `docs/governance/documentation-policy.md`
 - `docs/governance/git-monorepo-policy.md`
 - `docs/governance/frontend-ui-policy.md`
+- `docs/governance/seo-performance-policy.md`
 - `docs/governance/security-quality-policy.md`
 - `docs/governance/pr-policy-source-of-truth.json`
 - `scripts/ci/check-required-docs.sh`
@@ -16,7 +17,7 @@
 - When multiple scopes are touched, run every matching workflow and aggregate all gates.
 
 ## Workflow Routing
-- `/app`, `components`, auth flows, or browser-critical routes: `.codex/workflows/frontend-cycle.md`
+- `/app`, `components`, auth flows, browser-critical routes, metadata, robots, sitemap, images, fonts, analytics, or third-party frontend scripts: `.codex/workflows/frontend-cycle.md`
 - Release hardening or security-critical rollout: `.codex/workflows/mainnet-hardening.md`
 - Responsive or critical browser QA: `.codex/workflows/responsive-qa.md`
 - `/db`, `lib/db`, persistence repositories, or `scripts/db-*`: choose the dominant runtime workflow, then add `qa`, `docs`, and `reviewer`; enforce the DB migration gate from `testing-policy`.
@@ -24,8 +25,8 @@
 
 ## Agent Routing
 - `planner`: detect scope, activate workflows, delegate, aggregate evidence, enforce Definition of Done.
-- `frontend`: Next.js App Router, SSR-first boundaries, client/server separation, UI implementation.
-- `qa`: tests, Playwright, browser evidence, responsive verification.
+- `frontend`: Next.js App Router, SSR-first boundaries, client/server separation, UI implementation, and performance-aware rendering.
+- `qa`: tests, Playwright, browser evidence, responsive verification, and SEO/performance gates.
 - `docs`: canonical doc sync, feature notes, RFC traceability, migration notes.
 - `security`: authorization, replay, dependency, and trust-boundary review.
 - `reviewer`: clean-code, duplication, naming, dead-code, governance, and final completion gate.
@@ -34,6 +35,7 @@
 - Delegate the smallest possible context: changed paths, active workflow, required policies, expected evidence.
 - Run independent specialists in parallel only when their write scopes do not overlap.
 - `security` joins auth, admin, payment, data, and other high-trust-surface changes.
+- `qa` joins whenever public pages, metadata, robots, sitemap, images, fonts, analytics, or first-load behavior are touched.
 - `reviewer` is the final gate and should review findings before completion, not just summarize progress.
 
 ## Definition of Done
@@ -41,5 +43,6 @@
 - Database-backed schema or persistence changes: tracked migrations applied, no pending tracked migrations, and `validate:db` passes when `DATABASE_URL` is available
 - Required docs updated per `docs/governance/documentation-policy.md`
 - Required PR/RFC metadata still aligns with `docs/governance/pr-policy-source-of-truth.json`
+- Public web changes that touch SEO/performance surfaces: `npm run validate:seo-performance` passes
 - Frontend/auth critical flows: Playwright passed when available; browser evidence captured when browser-critical
 - Final `reviewer` pass finds no unresolved blocking issues
