@@ -60,6 +60,9 @@ function parseArgs(argv) {
     executionOrder: [],
     completionGates: [],
     slices: [],
+    sliceCommits: [],
+    integrationCommits: [],
+    prReference: "TBD",
     parentBranch: "",
     integrationBranch: "",
     help: false
@@ -95,6 +98,12 @@ function parseArgs(argv) {
       args.completionGates.push(argv[++i]);
     } else if (token === "--slice") {
       args.slices.push(argv[++i]);
+    } else if (token === "--slice-commit") {
+      args.sliceCommits.push(argv[++i]);
+    } else if (token === "--integration-commit") {
+      args.integrationCommits.push(argv[++i]);
+    } else if (token === "--pr") {
+      args.prReference = argv[++i];
     } else if (token === "--parent-branch") {
       args.parentBranch = argv[++i];
     } else if (token === "--integration-branch") {
@@ -165,8 +174,11 @@ async function runCli(argv) {
     .replaceAll("{{ISSUE_ID}}", issueId)
     .replaceAll("{{OWNER}}", args.owner)
     .replaceAll("{{PARENT_BRANCH}}", parentBranch)
+    .replaceAll("{{PR_REFERENCE}}", args.prReference || "TBD")
     .replaceAll("{{INTEGRATION_BRANCH}}", integrationBranch)
     .replaceAll("{{SLICE_ROWS}}", renderSliceRows(args.slices))
+    .replaceAll("{{SLICE_COMMIT_ITEMS}}", renderBulletList(args.sliceCommits))
+    .replaceAll("{{INTEGRATION_COMMIT_ITEMS}}", renderBulletList(args.integrationCommits))
     .replaceAll("{{EXECUTION_ORDER}}", renderOrderedList(args.executionOrder))
     .replaceAll("{{RISK_ITEMS}}", renderBulletList(args.risks))
     .replaceAll("{{COMPLETION_GATE_ITEMS}}", renderBulletList(args.completionGates));
