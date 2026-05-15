@@ -1,3 +1,15 @@
+import Image from "next/image";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "DIGIT Trading Academy | Plataforma integral",
+  description:
+    "Academia estructurada, performance system, biblioteca aplicada y entorno de seguimiento dentro de una sola experiencia.",
+  alternates: {
+    canonical: "/"
+  }
+};
+
 const layers = [
   {
     icon: "school",
@@ -125,10 +137,12 @@ export default function HomePage() {
           </span>
         </div>
         <div className="interactive-scale h-9 w-9 overflow-hidden rounded-full border border-white/10">
-          <img
+          <Image
             alt="User"
             className="h-full w-full object-cover"
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFalGliiUQrLtWKJib7YedhAEvm9tPCxYFOuuktNzYxDSasFctdxBeDzTyBUBCNRsejow82-2r-0dtxTm5jIKPbmcXpJfw8JrC8oHO4dmmDkXBEowBPf1aU882NB2-yb6thOgiP8oO7aUKBXAQbiTbMuFOLSBBZ1Sd9JJEMw7BkQcHGadzStyJf1Kt-3uFaw2NBIKhhk22XYltkgQ-qOJ2g0p5b3-WB5goQPnpKEDszdnFw8a-gEMGB0LUZ7M_v5w2Yywgcp54Acs"
+            width={36}
+            height={36}
           />
         </div>
       </header>

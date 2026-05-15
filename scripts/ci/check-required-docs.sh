@@ -67,6 +67,7 @@ require_docs_changed() {
 touches_app=0
 touches_core=0
 touches_product_code=0
+touches_shared_governance=0
 missing_any=0
 
 if has_changed '^app/'; then
@@ -80,6 +81,10 @@ fi
 
 if has_changed '^app/'; then
   touches_product_code=1
+fi
+
+if has_changed '^(AGENTS\.md|\.codex/|scripts/ci/|scripts/linear-plan|docs/governance/seo-performance-policy\.md|docs/governance/git-monorepo-policy\.md|docs/templates/linear-single-issue-slices\.template\.md)'; then
+  touches_shared_governance=1
 fi
 
 if [[ "${touches_core}" -eq 1 ]]; then
@@ -99,6 +104,10 @@ fi
 requires_feature_doc=0
 CURRENT_BRANCH="${HEAD_BRANCH:-$(git branch --show-current 2>/dev/null || true)}"
 if [[ "${touches_product_code}" -eq 1 && "${CURRENT_BRANCH}" =~ ^(feature|fix|refactor)/ ]]; then
+  requires_feature_doc=1
+fi
+
+if [[ "${touches_shared_governance}" -eq 1 && "${CURRENT_BRANCH}" =~ ^(feature|fix|refactor)/ ]]; then
   requires_feature_doc=1
 fi
 

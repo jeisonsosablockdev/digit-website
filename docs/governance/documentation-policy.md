@@ -34,6 +34,18 @@ Must document:
 - replay protection logic when applicable
 - trust boundaries
 
+## SEO And Performance Governance Changes
+
+Changes that alter frontend delivery rules, performance budgets, rendering constraints, metadata standards, robots, sitemap, font strategy, image strategy, or first-load script policy must update:
+- `/docs/governance/seo-performance-policy.md`
+
+If the change is implemented as a shared feature initiative, also update a feature note under:
+- `/docs/features/*.md`
+
+If the initiative is running in single-issue slice mode, documentation updates must live in an explicit documentation slice branched from the mother issue branch rather than being mixed informally into the mother branch.
+
+If the initiative is documented in Linear, the issue body or canonical update comment must include branch, PR, and commit-hash traceability for the slices already executed.
+
 ## Strict Rule
 
 If documentation is missing or outdated, the task is incomplete.
@@ -46,6 +58,12 @@ For branch types:
 - `refactor/*`
 
 If changes touch product code (`/app`, `/packages`, `/lib`, `/tests`, `/e2e`), the PR must update at least one Markdown file under `/docs/features/*.md`.
+
+Shared governance, agent-routing, workflow, CI, or validation work that changes how product work is gated must also update at least one Markdown file under `/docs/features/*.md`.
+
+When that work belongs to a multi-slice mother issue, plan and execute a dedicated documentation slice so the doc delta is reviewable on its own.
+
+For Linear-tracked slice work, that documentation slice should own the commit-traceability update in the parent issue unless a later documentation slice explicitly supersedes it.
 
 ## RFC Workflow by Epic
 

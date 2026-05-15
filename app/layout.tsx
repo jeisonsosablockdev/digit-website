@@ -19,8 +19,24 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://digitacademy.com"),
   title: "DIGIT Trading Academy",
-  description: "Plataforma integral de formación, journaling y performance para traders."
+  description: "Plataforma integral de formación, journaling y performance para traders.",
+  openGraph: {
+    title: "DIGIT Trading Academy",
+    description:
+      "Plataforma integral de formación, journaling y performance para traders.",
+    url: "https://digitacademy.com",
+    siteName: "DIGIT Trading Academy",
+    locale: "es_CO",
+    type: "website"
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "DIGIT Trading Academy",
+    description:
+      "Plataforma integral de formación, journaling y performance para traders."
+  }
 };
 
 export default function RootLayout({
