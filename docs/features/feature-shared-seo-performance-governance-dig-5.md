@@ -19,6 +19,7 @@ Last Updated: 2026-05-14 UTC
 4. Validación y gates
 5. Calibración sobre la app actual
 6. Fix para que el issue madre use el branch generado desde Linear como branch canónico
+7. Regla para exigir trazabilidad de commits en Linear además de branches y PR
 
 ## Notes
 

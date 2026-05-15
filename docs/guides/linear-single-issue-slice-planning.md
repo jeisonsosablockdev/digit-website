@@ -23,3 +23,10 @@ That documentation slice should:
 - branch from the mother issue branch
 - carry canonical docs, feature-note updates, and planning traceability
 - remain separate from heavier implementation slices so governance/doc review stays clean
+
+When you document progress in the parent Linear issue, include:
+- mother branch
+- slice branches
+- PR reference when available
+- commit hash plus short summary for each completed slice
+- mother-branch integration commits after slices are merged there
