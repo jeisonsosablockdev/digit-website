@@ -103,8 +103,11 @@ if has_changed '^app/'; then
   touches_app=1
 fi
 
-if has_changed '^(packages|lib|tests|e2e)/'; then
+if has_changed '^(packages|lib)/'; then
   touches_core=1
+fi
+
+if has_changed '^(packages|lib|tests|e2e)/'; then
   touches_product_code=1
 fi
 
