@@ -3,6 +3,15 @@
 Last Updated: 2026-05-18 UTC
 Status: planned
 Owner: shared workflow
+Related Solution Artifact: `docs/fixes/fix-agents-orchestation-implementation.md`
+
+## Current State
+
+- mother branch created: `jeisonsosablockdev/dig-7-fix-agents-orchestation`
+- documentation slice created: `fix/docs-fix-agents-orchestation-dig-7-s00-documentation`
+- problem artifact exists
+- solution artifact exists
+- implementation slices are still pending by design
 
 ## Summary
 
@@ -179,6 +188,8 @@ Problema:
 - el artefacto todavía aparece como output frecuente, no como input obligatorio
 - no se fuerza su creación o actualización antes de implementar
 - `docs/fixes/*.md` no está enforced por scripts
+- no existe regla operativa explícita de bilingüismo para artefactos y documentación de trazabilidad
+- no existe separación formal entre artefacto del problema y artefacto de la solución/implementación
 
 Conclusión:
 
@@ -419,6 +430,55 @@ Ese artefacto debe:
 - actualizarse si ya existe
 - preceder la implementación
 - preceder las actualizaciones importantes en Linear
+- mantenerse en inglés y en español
+
+Este fix agrega una separación explícita:
+
+- un artefacto del problema
+- un artefacto de la solución/implementación
+
+## 3A. Problem artifact first
+
+Cuando el usuario plantea un problema, necesidad o cambio, primero debe existir un artefacto del problema.
+
+Ese artefacto captura:
+
+- cuál es el problema
+- qué se espera resolver
+- por qué importa
+- cuál es el alcance inicial
+- qué preguntas siguen abiertas
+
+Debe existir aunque todavía no haya solución cerrada ni slicing final.
+
+## 3B. Solution artifact second
+
+Después de entender el problema y antes de implementar, debe existir un artefacto de solución/implementación.
+
+Ese artefacto captura:
+
+- cuál es el enfoque elegido y por qué
+- qué decisiones técnicas ya quedaron cerradas
+- cómo se divide en slices y en qué orden deben ejecutarse
+- qué branches existirán y cómo mergean de vuelta a la mother branch
+- qué pruebas se escribirán primero
+- qué validaciones, dependencias, riesgos y gates aplican
+- qué trazabilidad se propagará a Linear
+- qué preguntas críticas siguen abiertas, si las hay
+
+En corto:
+
+- el problem artifact explica qué hay que resolver
+- el solution artifact explica cómo se resolverá
+
+Regla de calidad:
+
+- el solution artifact debe ser decision-complete para el nivel de implementación que habilita
+- no puede dejar decisiones técnicas de alto impacto escondidas en lenguaje ambiguo
+- debe permitir que otro ingeniero o agente implemente sin inventar criterios materiales
+- si falta una definición crítica que no pueda descubrirse en el repo, debe registrarla explícitamente y elevarla al usuario antes de implementar
+- si esa pregunta crítica sigue abierta, la implementación queda bloqueada hasta resolverla
+- si la solución introduce tooling nueva, debe listar explícitamente dependencias, scripts, archivos de configuración y el slice donde se instalarán
 
 ## 4. Documentation slice before implementation
 
@@ -489,6 +549,71 @@ Todo artefacto de feature o fix debe incluir como mínimo:
 - Commit Traceability
 - Completion Criteria
 
+Regla adicional:
+
+- el artefacto debe mantenerse en inglés y en español
+- ambas versiones deben representar el mismo estado operativo
+- ninguna versión puede quedarse como traducción desactualizada de la otra
+
+## Dual Artifact Model
+
+Toda iniciativa no trivial debe tener dos artefactos distintos:
+
+### 1. Problem Artifact
+
+Propósito:
+
+- capturar el problema pedido por el usuario
+- describir el expected outcome
+- fijar alcance inicial y contexto
+
+Contenido mínimo:
+
+- Summary
+- Problem Statement
+- Why It Matters
+- Expected Outcome
+- Scope
+- Non-Goals
+- Open Questions
+- Initial Risks
+- Linear Issue
+
+### 2. Solution Artifact
+
+Propósito:
+
+- capturar la solución elegida
+- estructurar el plan de slices
+- definir pruebas y gates
+- servir como base operativa para Linear y reviewer
+- dejar la implementación técnicamente cerrada para el siguiente slice
+
+Contenido mínimo:
+
+- Summary
+- Goal
+- Mother Branch
+- Documentation Slice
+- Atomic Slice Plan
+- RFC linkage when applicable
+- Test Plan First
+- Technical Decisions
+- Open Technical Questions
+- Tooling Changes
+- Validation Gates
+- Risks
+- Linear Sync Notes
+- Commit Traceability
+- Completion Criteria
+
+Regla:
+
+- no se debe abrir implementación no trivial si existe problem artifact pero no existe solution artifact
+- si cambia el problema, primero se actualiza el problem artifact
+- si cambia la estrategia de ejecución, primero se actualiza el solution artifact
+- si el solution artifact detecta una preferencia técnica crítica aún no resuelta, debe registrar la pregunta y bloquear el inicio del slice de implementación correspondiente
+
 Si requiere RFC, además:
 
 - RFC Required
@@ -519,15 +644,18 @@ Si es documentation slice, además:
 
 Base recomendada para este repo:
 
-- `node:test`
-- `node:assert/strict`
+- `Vitest`
+- `expect()` integrado de `Vitest`
+- `@testing-library/react`
+- `@testing-library/jest-dom`
 
 Razones:
 
-- liviano
-- nativo
-- suficiente para scripts, validadores y contratos
-- compatible con una evolución posterior hacia Playwright u otras capas
+- consistente para UI, componentes, scripts y validadores
+- rápido para feedback loop de TDD
+- alineado con desarrollo moderno en Next.js y React
+- permite matchers de DOM legibles basados en comportamiento real del usuario
+- evita dividir el repo en dos historias distintas de assertions
 
 ## Required TDD Surfaces
 
@@ -542,10 +670,17 @@ Deben cubrir:
 - gating helpers
 - CI validators
 
+Estándar:
+
+- también corren en `Vitest` como stack unificado del repo, salvo excepción futura documentada en policy canónica
+
 ### Browser-critical UI
 
 Debe combinar:
 
+- `Vitest`
+- `@testing-library/react`
+- `@testing-library/jest-dom`
 - tests estructurales cuando aplique
 - Playwright para flujos críticos
 - responsive QA como evidencia complementaria
@@ -557,6 +692,9 @@ Ambos deben definir en el artefacto:
 - qué prueba se escribe primero
 - qué comportamiento bloquea
 - qué comando demuestra rojo -> verde
+- qué dependencias nuevas se instalarán en `package.json`
+- qué scripts nuevos se agregarán
+- qué configuración de test o browser se incorporará
 
 ## Enforcement Gaps To Fix
 
@@ -589,6 +727,8 @@ Esta es la lista concreta de debilidades actuales del enforcement:
 25. No hay enforcement de `delegates_to`, `parallel_safe` o `reads` declarados en `.codex/agents/*.toml`.
 26. No hay drift check específico entre `AGENTS.md`, `.codex/*` y los documentos canónicos.
 27. `.codex/config.toml` parece conservar configuración de tooling que ya no representa el dominio actual del repo.
+28. No hay enforcement de bilingüismo para artefactos, RFCs y documentación operativa trazable.
+29. No hay enforcement de un artifact del problema separado del artifact de solución/implementación.
 
 ## Agent Responsibilities
 
@@ -610,7 +750,9 @@ Debe:
 
 Debe:
 
-- crear o actualizar artefacto antes de implementación
+- crear o actualizar el problem artifact cuando nace el trabajo
+- crear o actualizar el solution artifact antes de implementación
+- mantener versión en inglés y en español cuando la documentación operativa lo requiera
 - crear o actualizar RFC cuando aplique
 - fijar atomic slice plan
 - mantener artefacto sincronizado con avance real
@@ -704,51 +846,70 @@ Ningún feature o fix no trivial empieza sin artefacto previo.
 
 ## Rule 4
 
+Toda iniciativa no trivial debe tener:
+
+- un problem artifact
+- un solution artifact
+
+## Rule 5
+
+El problem artifact se crea o actualiza primero; el solution artifact se crea o actualiza antes de implementar.
+
+## Rule 6
+
 Todo trabajo multi-slice debe tener:
 
 - mother branch
 - documentation slice
 - slice map atómico
 
-## Rule 5
+## Rule 7
 
 La documentation slice debe existir antes de slices de implementación.
 
-## Rule 6
+## Rule 8
 
 Si la iniciativa requiere RFC, el RFC nace y se actualiza en el documentation slice.
 
-## Rule 7
+## Rule 9
 
 Linear se actualiza desde el artefacto, no al revés.
 
-## Rule 8
-
-Para crear o actualizar la entrada operativa, se usa primero el conector `Linear`; si falla, se usa `Computer Use`.
-
-## Rule 9
-
-Cuando aplique TDD, primero se escriben las pruebas y luego se implementa.
-
 ## Rule 10
 
-Sin evidencia de tests-first, el slice no cierra.
+Linear debe reflejar tanto el problem artifact como el solution artifact cuando ambos apliquen.
 
 ## Rule 11
 
-Captura ambigua, evidence incompleta o overflow no resuelto cuentan como `block`.
+Para crear o actualizar la entrada operativa, se usa primero el conector `Linear`; si falla, se usa `Computer Use`.
 
 ## Rule 12
 
-Features y fixes comparten el mismo estándar estructural de artefacto y trazabilidad.
+Cuando aplique TDD, primero se escriben las pruebas y luego se implementa.
 
 ## Rule 13
 
-`AGENTS.md` y `.codex` no pueden divergir silenciosamente de la gobernanza canónica.
+Sin evidencia de tests-first, el slice no cierra.
 
 ## Rule 14
 
+Captura ambigua, evidence incompleta o overflow no resuelto cuentan como `block`.
+
+## Rule 15
+
+Features y fixes comparten el mismo estándar estructural de artefacto y trazabilidad.
+
+## Rule 16
+
+`AGENTS.md` y `.codex` no pueden divergir silenciosamente de la gobernanza canónica.
+
+## Rule 17
+
 Los archivos declarativos de agentes no deben contener ownership o tooling drift que el sistema ya no reconozca como parte del dominio actual.
+
+## Rule 18
+
+La documentación operativa requerida para features, fixes y RFCs debe mantenerse en inglés y en español.
 
 ## Phased Implementation Plan
 
@@ -758,6 +919,8 @@ Los archivos declarativos de agentes no deben contener ownership o tooling drift
 - endurecer `git-monorepo-policy`
 - endurecer guías y templates
 - endurecer templates RFC
+- definir dual artifact model: problem + solution
+- definir modelo bilingüe para artefactos y documentación operativa
 - revisar `AGENTS.md` y `.codex/*` como capa de resumen operativo
 
 ## Phase 2: Branching and Linear enforcement
@@ -771,7 +934,8 @@ Los archivos declarativos de agentes no deben contener ownership o tooling drift
 
 - obligar `docs/features/*.md`
 - obligar `docs/fixes/*.md`
-- validar artefacto previo
+- validar problem artifact previo
+- validar solution artifact previo a implementación
 - validar documentation slice
 
 ## Phase 4: RFC enforcement
@@ -783,7 +947,7 @@ Los archivos declarativos de agentes no deben contener ownership o tooling drift
 
 - agregar `tests/`
 - agregar `npm test`
-- agregar tests con `node:test` y `node:assert/strict`
+- agregar `Vitest`, `expect()`, `@testing-library/react` y `@testing-library/jest-dom`
 - integrar tests en `validate`
 
 ## Phase 6: PR and QA enforcement
@@ -806,11 +970,13 @@ Este fix se considera completo cuando:
 - existe issue obligatorio en Linear para RFCs, features y fixes nuevos
 - la mother branch sale del `git branch name` del issue madre
 - existe artefacto obligatorio para features y fixes
+- existe separación entre artefacto del problema y artefacto de solución/implementación
 - el artefacto es previo al cambio
+- la documentación operativa requerida existe en inglés y en español
 - mother branch + documentation slice + implementation slices quedan endurecidos como secuencia
 - el RFC queda anclado al documentation slice cuando aplique
 - existe `npm test`
-- TDD queda definido como tests-first con stack ligera de asserts
+- TDD queda definido como tests-first con `Vitest` unificado y matchers de DOM para Next.js/React
 - `validate` incorpora pruebas reales
 - los scripts de PR dejan de ser placeholders
 - QA responsive/browser-critical tiene bloqueo contractual real
