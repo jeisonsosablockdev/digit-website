@@ -6,9 +6,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "rfc:new": "node ./scripts/rfc-new.js",
     "linear:plan": "node ./scripts/linear-plan.js",
-    "validate": "npm run build && npm run validate:seo-performance && npm run validate:docs-governance",
+    "validate": "npm run test && npm run build && npm run validate:seo-performance && npm run validate:docs-governance",
     "validate:seo-performance": "node ./scripts/ci/validate-seo-performance.js",
     "validate:docs-governance": "bash ./scripts/ci/validate-doc-governance.sh",
     "knowledge:scan": "node ./scripts/knowledge/scan-recent-changes.ts",
@@ -31,5 +33,11 @@
     "react-dom": "^19.2.6",
     "tailwindcss": "^3.4.19",
     "typescript": "^6.0.3"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "jsdom": "^29.1.1",
+    "vitest": "^4.1.6"
   }
 }
