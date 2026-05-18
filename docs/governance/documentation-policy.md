@@ -50,6 +50,77 @@ If the initiative is documented in Linear, the issue body or canonical update co
 
 If documentation is missing or outdated, the task is incomplete.
 
+## Initiative Artifacts For Features And Fixes
+
+Non-trivial `feature/*`, `fix/*`, `security/*`, and `refactor/*` initiatives must use two artifacts:
+
+- a problem artifact
+- a solution artifact
+
+Recommended locations:
+
+- feature problem artifact: `/docs/features/feature-<slug>.md`
+- feature solution artifact: `/docs/features/feature-<slug>-implementation.md`
+- fix problem artifact: `/docs/fixes/fix-<slug>.md`
+- fix solution artifact: `/docs/fixes/fix-<slug>-implementation.md`
+
+Required order:
+
+1. create or update the problem artifact
+2. create or update the solution artifact
+3. open implementation slices only after the solution artifact is ready for that level of execution
+
+Problem artifacts must capture:
+
+- the problem statement
+- the expected outcome
+- why the work matters
+- initial scope
+- open questions
+
+Solution artifacts must capture:
+
+- the chosen technical approach
+- atomic slice plan
+- branch and merge structure
+- tests-first plan
+- validation gates
+- tooling changes
+- commit and Linear traceability
+
+## Solution Artifact Quality Rule
+
+The solution artifact is not a conceptual note. It is the technical implementation source of truth for the next slice.
+
+It must be decision-complete for the level of implementation it unlocks.
+
+That means it must:
+
+- state explicit technical choices
+- state execution order and dependencies
+- state tests-first expectations
+- state package, script, and configuration changes when new tooling is introduced
+- state critical open technical questions when they exist
+
+If a material technical decision cannot be derived from the repository and still depends on user intent, the solution artifact must:
+
+- record the question explicitly
+- block the corresponding implementation slice until the question is answered
+
+## Bilingual Operational Documentation
+
+Required operational documentation for features, fixes, RFCs, and execution artifacts must be maintained in English and Spanish.
+
+Allowed forms:
+
+- one file with aligned ES and EN sections
+- two linked files when a policy explicitly allows that structure
+
+In both cases:
+
+- both language versions must describe the same current operating state
+- neither language version may lag behind the other
+
 ## Feature Notes for Small or Iterative Work
 
 For branch types:
@@ -64,6 +135,8 @@ Shared governance, agent-routing, workflow, CI, or validation work that changes 
 When that work belongs to a multi-slice mother issue, plan and execute a dedicated documentation slice so the doc delta is reviewable on its own.
 
 For Linear-tracked slice work, that documentation slice should own the commit-traceability update in the parent issue unless a later documentation slice explicitly supersedes it.
+
+When dual artifacts exist, the feature note under `/docs/features/*.md` acts as the thin shared traceability layer, while the deeper problem/solution detail remains in the owning feature or fix artifacts.
 
 ## RFC Workflow by Epic
 
@@ -88,3 +161,9 @@ Allowed status values:
 - `approved`
 - `implemented`
 - `rejected`
+
+If the initiative runs in slice mode:
+
+- the RFC must be created or updated in the documentation slice
+- the documentation slice is the owner of RFC traceability for that initiative
+- implementation slices must reference the RFC already established by the documentation slice instead of creating ad hoc RFC updates later

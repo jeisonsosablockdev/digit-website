@@ -7,6 +7,9 @@
 - Owner: `<owner>`
 - Created: `<YYYY-MM-DD>`
 - Last Updated: `<YYYY-MM-DD>`
+- Language Coverage: `bilingual` (`bilingual | exception-documented`)
+- Mother Branch: `<mother-branch>`
+- Documentation Slice: `<documentation-slice>`
 
 ## Scope
 - Problem statement:
@@ -38,8 +41,15 @@
 - [ ] Question 1
 - [ ] Question 2
 
+## Tooling Changes
+- Dependencies:
+- Scripts:
+- Config/setup files:
+- Slice owner:
+
 ## Traceability
 - Issue(s):
+- Problem artifact:
+- Solution artifact:
 - PR(s):
 - Final commit hash(es):
-
