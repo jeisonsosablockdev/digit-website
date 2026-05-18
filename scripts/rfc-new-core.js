@@ -1,5 +1,6 @@
 const fs = require("node:fs/promises");
 const path = require("node:path");
+const { execFileSync } = require("node:child_process");
 
 const REQUIRED_TEMPLATES = {
   epic: "EPIC-README.template.md",
@@ -55,6 +56,21 @@ function toTitleFromSlug(slug) {
     .join(" ");
 }
 
+function currentBranch(rootDir) {
+  try {
+    return execFileSync("git", ["branch", "--show-current"], {
+      cwd: rootDir,
+      encoding: "utf8"
+    }).trim();
+  } catch {
+    return "";
+  }
+}
+
+function looksLikeDocumentationSlice(branchName) {
+  return /-s\d{2}-documentation$/i.test(String(branchName ?? "").trim());
+}
+
 function parseArgs(argv) {
   const args = {
     epic: "",
@@ -62,6 +78,11 @@ function parseArgs(argv) {
     storyId: "01",
     storySlug: "kickoff",
     owner: process.env.USER || process.env.USERNAME || "unknown",
+    motherBranch: "",
+    documentationSlice: "",
+    languageCoverage: "bilingual",
+    problemArtifact: "",
+    solutionArtifact: "",
     force: false,
     help: false
   };
@@ -79,7 +100,18 @@ function parseArgs(argv) {
       continue;
     }
 
-    if (token === "--epic" || token === "--slug" || token === "--story-id" || token === "--story-slug" || token === "--owner") {
+    if (
+      token === "--epic" ||
+      token === "--slug" ||
+      token === "--story-id" ||
+      token === "--story-slug" ||
+      token === "--owner" ||
+      token === "--mother-branch" ||
+      token === "--documentation-slice" ||
+      token === "--language-coverage" ||
+      token === "--problem-artifact" ||
+      token === "--solution-artifact"
+    ) {
       const next = argv[index + 1];
 
       if (!next || next.startsWith("--")) {
@@ -91,6 +123,11 @@ function parseArgs(argv) {
       if (token === "--story-id") args.storyId = next;
       if (token === "--story-slug") args.storySlug = next;
       if (token === "--owner") args.owner = next;
+      if (token === "--mother-branch") args.motherBranch = next;
+      if (token === "--documentation-slice") args.documentationSlice = next;
+      if (token === "--language-coverage") args.languageCoverage = next;
+      if (token === "--problem-artifact") args.problemArtifact = next;
+      if (token === "--solution-artifact") args.solutionArtifact = next;
       index += 1;
       continue;
     }
@@ -101,7 +138,19 @@ function parseArgs(argv) {
   return args;
 }
 
-function buildReplacements({ epicId, epicSlug, storyId, storySlug, owner, date }) {
+function buildReplacements({
+  epicId,
+  epicSlug,
+  storyId,
+  storySlug,
+  owner,
+  date,
+  motherBranch,
+  documentationSlice,
+  languageCoverage,
+  problemArtifact,
+  solutionArtifact
+}) {
   const epicName = `EPIC-${epicId}-${epicSlug}`;
   const storyPrefix = `STORY-${epicId}-${storyId}`;
   const storyName = `${storyPrefix}-${storySlug}`;
@@ -118,7 +167,12 @@ function buildReplacements({ epicId, epicSlug, storyId, storySlug, owner, date }
       ["STORY-<id>-<slug>", storyName],
       ["<short-title>", toTitleFromSlug(epicSlug)],
       ["<owner>", owner],
-      ["<YYYY-MM-DD>", date]
+      ["<YYYY-MM-DD>", date],
+      ["`bilingual` (`bilingual | exception-documented`)", `\`${languageCoverage}\` (\`bilingual | exception-documented\`)`],
+      ["<mother-branch>", motherBranch],
+      ["<documentation-slice>", documentationSlice],
+      ["- Problem artifact:", `- Problem artifact: ${problemArtifact || "TBD"}`],
+      ["- Solution artifact:", `- Solution artifact: ${solutionArtifact || "TBD"}`]
     ]
   };
 }
@@ -152,6 +206,10 @@ async function createRfcScaffold(options) {
   const storyId = normalizeStoryId(options.storyId || "01");
   const storySlug = slugify(options.storySlug || "kickoff");
   const owner = String(options.owner || "unknown");
+  const activeBranch = currentBranch(rootDir);
+  const documentationSlice = String(options.documentationSlice || activeBranch || "").trim();
+  const motherBranch = String(options.motherBranch || "").trim();
+  const languageCoverage = String(options.languageCoverage || "bilingual").trim();
   const force = Boolean(options.force);
 
   if (!epicSlug) {
@@ -160,6 +218,18 @@ async function createRfcScaffold(options) {
 
   if (!storySlug) {
     throw new Error("`--story-slug` cannot be empty.");
+  }
+
+  if (!documentationSlice) {
+    throw new Error("`--documentation-slice` is required when the current branch cannot be inferred.");
+  }
+
+  if (!looksLikeDocumentationSlice(documentationSlice)) {
+    throw new Error("RFC scaffolding must run from a documentation slice or receive `--documentation-slice` with that branch.");
+  }
+
+  if (!motherBranch) {
+    throw new Error("`--mother-branch` is required. Use the canonical Linear mother branch.");
   }
 
   const rfcsRoot = path.join(rootDir, "docs", "rfcs");
@@ -171,7 +241,12 @@ async function createRfcScaffold(options) {
     storyId,
     storySlug,
     owner,
-    date: new Date().toISOString().slice(0, 10)
+    date: new Date().toISOString().slice(0, 10),
+    motherBranch,
+    documentationSlice,
+    languageCoverage,
+    problemArtifact: options.problemArtifact,
+    solutionArtifact: options.solutionArtifact
   });
 
   const epicFolderName = epicName;
@@ -230,6 +305,11 @@ function usage() {
     "  --story-id <id>        Story sequence id (default: 01)",
     "  --story-slug <slug>    Story slug (default: kickoff)",
     "  --owner <name>         Metadata owner value (default: $USER)",
+    "  --mother-branch <ref>  Canonical Linear mother branch",
+    "  --documentation-slice <ref>  Documentation slice branch name",
+    "  --language-coverage <value>  bilingual | exception-documented (default: bilingual)",
+    "  --problem-artifact <path>    Problem artifact path",
+    "  --solution-artifact <path>   Solution artifact path",
     "  --force                Overwrite existing epic folder",
     "  --help                 Show this help"
   ].join("\n");
@@ -249,6 +329,11 @@ async function runCli(argv) {
     storyId: args.storyId,
     storySlug: args.storySlug,
     owner: args.owner,
+    motherBranch: args.motherBranch,
+    documentationSlice: args.documentationSlice,
+    languageCoverage: args.languageCoverage,
+    problemArtifact: args.problemArtifact,
+    solutionArtifact: args.solutionArtifact,
     force: args.force
   });
 
@@ -266,4 +351,3 @@ module.exports = {
   slugify,
   usage
 };
-
