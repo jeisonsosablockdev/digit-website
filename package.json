@@ -8,6 +8,7 @@
     "lint": "eslint .",
     "test": "vitest run",
     "test:watch": "vitest",
+    "test:e2e": "playwright test",
     "rfc:new": "node ./scripts/rfc-new.js",
     "linear:plan": "node ./scripts/linear-plan.js",
     "validate": "npm run test && npm run build && npm run validate:seo-performance && npm run validate:docs-governance",
@@ -35,6 +36,7 @@
     "typescript": "^6.0.3"
   },
   "devDependencies": {
+    "@playwright/test": "^1.60.0",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
     "jsdom": "^29.1.1",
