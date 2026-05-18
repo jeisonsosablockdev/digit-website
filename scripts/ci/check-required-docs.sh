@@ -46,6 +46,11 @@ changed_files_include_path() {
   grep -Fx -q -- "${file_path}" <<<"${CHANGED_FILES}"
 }
 
+has_changed_regex() {
+  local regex="$1"
+  grep -E -q -- "${regex}" <<<"${CHANGED_FILES}"
+}
+
 require_docs_changed() {
   local scope="$1"
   shift
@@ -61,6 +66,30 @@ require_docs_changed() {
       missing=1
     fi
   done
+  return "${missing}"
+}
+
+require_artifact_pair() {
+  local artifact_scope="$1"
+  local root_regex="$2"
+  local solution_regex="$3"
+  local missing=0
+
+  if ! has_changed_regex "${root_regex}"; then
+    echo "::error::Missing ${artifact_scope} artifact update."
+    return 1
+  fi
+
+  if ! grep -E -- "${root_regex}" <<<"${CHANGED_FILES}" | grep -E -v -- '-implementation\.md$' >/dev/null; then
+    echo "::error::Missing ${artifact_scope} problem artifact update."
+    missing=1
+  fi
+
+  if ! has_changed_regex "${solution_regex}"; then
+    echo "::error::Missing ${artifact_scope} solution artifact update."
+    missing=1
+  fi
+
   return "${missing}"
 }
 
@@ -116,6 +145,23 @@ if [[ "${requires_feature_doc}" -eq 1 ]]; then
     echo "::error::Missing feature note update under docs/features/."
     missing_any=1
   fi
+fi
+
+if [[ "${touches_product_code}" -eq 1 || "${touches_shared_governance}" -eq 1 ]]; then
+  case "${CURRENT_BRANCH}" in
+    fix/*)
+      require_artifact_pair \
+        "fix" \
+        '^docs/fixes/.*\.md$' \
+        '^docs/fixes/.*-implementation\.md$' || missing_any=1
+      ;;
+    feature/*|refactor/*|security/*)
+      require_artifact_pair \
+        "feature" \
+        '^docs/features/.*\.md$' \
+        '^docs/features/.*-implementation\.md$' || missing_any=1
+      ;;
+  esac
 fi
 
 if [[ "${missing_any}" -ne 0 ]]; then
