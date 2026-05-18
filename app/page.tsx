@@ -1,5 +1,6 @@
-import Image from "next/image";
 import type { Metadata } from "next";
+
+import { SiteShell } from "@/components/site-shell";
 
 export const metadata: Metadata = {
   title: "DIGIT Trading Academy | Plataforma integral",
@@ -103,14 +104,6 @@ const faqs = [
   }
 ];
 
-const navItems = [
-  { icon: "home", active: true, label: "Home" },
-  { icon: "school", active: false, label: "Academy" },
-  { icon: "query_stats", active: false, label: "Performance" },
-  { icon: "hub", active: false, label: "Community" },
-  { icon: "person", active: false, label: "Profile" }
-];
-
 function ActionButtons() {
   return (
     <div className="flex flex-col gap-4">
@@ -126,27 +119,7 @@ function ActionButtons() {
 
 export default function HomePage() {
   return (
-    <>
-      <header className="glass-effect fixed inset-x-0 top-0 z-50 flex h-16 items-center justify-between border-b border-white/5 bg-glass-bg px-6">
-        <div className="flex items-center gap-4">
-          <button aria-label="Menu" className="interactive-scale">
-            <span className="material-symbols-outlined text-on-surface">menu</span>
-          </button>
-          <span className="font-headline text-xl font-bold tracking-tight">
-            DIGIT Academy
-          </span>
-        </div>
-        <div className="interactive-scale h-9 w-9 overflow-hidden rounded-full border border-white/10">
-          <Image
-            alt="User"
-            className="h-full w-full object-cover"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFalGliiUQrLtWKJib7YedhAEvm9tPCxYFOuuktNzYxDSasFctdxBeDzTyBUBCNRsejow82-2r-0dtxTm5jIKPbmcXpJfw8JrC8oHO4dmmDkXBEowBPf1aU882NB2-yb6thOgiP8oO7aUKBXAQbiTbMuFOLSBBZ1Sd9JJEMw7BkQcHGadzStyJf1Kt-3uFaw2NBIKhhk22XYltkgQ-qOJ2g0p5b3-WB5goQPnpKEDszdnFw8a-gEMGB0LUZ7M_v5w2Yywgcp54Acs"
-            width={36}
-            height={36}
-          />
-        </div>
-      </header>
-
+    <SiteShell currentPath="/">
       <main className="pb-32 pt-16">
         <section className="hero-bg-gradient relative overflow-hidden px-6 py-12">
           <div className="mx-auto w-full max-w-[1280px]">
@@ -514,31 +487,6 @@ export default function HomePage() {
           </div>
         </footer>
       </main>
-
-      <nav className="glass-effect fixed bottom-6 left-1/2 z-50 flex w-[90%] max-w-md -translate-x-1/2 items-center justify-around rounded-full border border-white/10 bg-glass-bg px-2 py-2 shadow-2xl shadow-neon">
-        {navItems.map((item) => (
-          <button
-            key={item.label}
-            aria-label={item.label}
-            className={`interactive-scale flex items-center justify-center rounded-full p-3 ${
-              item.active
-                ? "bg-secondary/10 text-secondary"
-                : "text-on-surface-variant"
-            }`}
-          >
-            <span
-              className="material-symbols-outlined"
-              style={
-                item.active
-                  ? { fontVariationSettings: '"FILL" 1, "wght" 500, "GRAD" 0, "opsz" 24' }
-                  : undefined
-              }
-            >
-              {item.icon}
-            </span>
-          </button>
-        ))}
-      </nav>
-    </>
+    </SiteShell>
   );
 }
