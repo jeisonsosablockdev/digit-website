@@ -10,7 +10,7 @@ Uso:
 Ejemplos:
   ./scripts/git-start.sh app initial-ui
   ./scripts/git-start.sh fix shared policy-cleanup
-  ./scripts/git-start.sh feature shared seo-performance-governance --mode integration --issue DIG-5
+  ./scripts/git-start.sh feature shared seo-performance-governance --mode integration --issue DIG-5 --linear-branch jeisonsosablockdev/dig-5-seo-performance-governance
   ./scripts/git-start.sh feature docs seo-performance-governance --mode slice --issue DIG-5 --slice-id S00 --slice-slug documentation --base feature/shared-seo-performance-governance-dig-5
   ./scripts/git-start.sh feature shared seo-performance-governance --mode slice --issue DIG-5 --slice-id S01 --slice-slug governance-policy --base feature/shared-seo-performance-governance-dig-5
 USAGE
@@ -84,12 +84,14 @@ ISSUE_KEY=""
 SLICE_ID=""
 SLICE_SLUG=""
 BASE_BRANCH=""
+LINEAR_BRANCH=""
 POSITIONAL=()
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --mode) MODE="$2"; shift 2 ;;
     --issue) ISSUE_KEY="$2"; shift 2 ;;
+    --linear-branch) LINEAR_BRANCH="$2"; shift 2 ;;
     --slice-id) SLICE_ID="$2"; shift 2 ;;
     --slice-slug) SLICE_SLUG="$2"; shift 2 ;;
     --base) BASE_BRANCH="$2"; shift 2 ;;
@@ -123,8 +125,12 @@ if [[ "${MODE}" == "single" ]]; then
   BRANCH="${BRANCH_PREFIX}"
   BASE_BRANCH="${BASE_BRANCH:-develop}"
 elif [[ "${MODE}" == "integration" ]]; then
-  NORMALIZED_ISSUE="$(normalize_issue_key "${ISSUE_KEY}")"
-  BRANCH="${BRANCH_PREFIX}-${NORMALIZED_ISSUE}-integration"
+  normalize_issue_key "${ISSUE_KEY}" >/dev/null
+  if [[ -z "${LINEAR_BRANCH}" ]]; then
+    echo "❌ --linear-branch es obligatorio para ramas integration. Usa el git branch name generado por Linear."
+    exit 1
+  fi
+  BRANCH="${LINEAR_BRANCH}"
   BASE_BRANCH="${BASE_BRANCH:-develop}"
 else
   NORMALIZED_ISSUE="$(normalize_issue_key "${ISSUE_KEY}")"

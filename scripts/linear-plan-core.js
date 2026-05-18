@@ -45,6 +45,10 @@ function currentBranch(rootDir) {
   }
 }
 
+function looksLikeSliceBranch(branchName) {
+  return /-s\d{2}-/i.test(String(branchName ?? "").trim());
+}
+
 function parseArgs(argv) {
   const args = {
     issueId: "",
@@ -65,6 +69,10 @@ function parseArgs(argv) {
     prReference: "TBD",
     parentBranch: "",
     integrationBranch: "",
+    problemArtifactPath: "",
+    solutionArtifactPath: "",
+    openTechnicalQuestions: [],
+    toolingChanges: [],
     help: false
   };
 
@@ -108,6 +116,14 @@ function parseArgs(argv) {
       args.parentBranch = argv[++i];
     } else if (token === "--integration-branch") {
       args.integrationBranch = argv[++i];
+    } else if (token === "--problem-artifact") {
+      args.problemArtifactPath = argv[++i];
+    } else if (token === "--solution-artifact") {
+      args.solutionArtifactPath = argv[++i];
+    } else if (token === "--open-technical-question") {
+      args.openTechnicalQuestions.push(argv[++i]);
+    } else if (token === "--tooling-change") {
+      args.toolingChanges.push(argv[++i]);
     } else {
       throw new Error(`Unknown argument: ${token}`);
     }
@@ -151,7 +167,7 @@ async function runCli(argv) {
   const args = parseArgs(argv);
   if (args.help) {
     console.log(
-      "Usage: npm run linear:plan -- --issue DIG-5 --type feature --scope shared --slug seo-performance-governance --parent-branch feature/shared-seo-performance-governance-dig-5"
+      "Usage: npm run linear:plan -- --issue DIG-5 --type feature --scope shared --slug seo-performance-governance --parent-branch jeisonsosablockdev/dig-5-seo-performance-governance --problem-artifact docs/features/feature-seo-performance-governance.md --solution-artifact docs/features/feature-seo-performance-governance-implementation.md"
     );
     return;
   }
@@ -163,7 +179,15 @@ async function runCli(argv) {
   const slug = slugify(args.slug);
   if (!slug) throw new Error("`--slug` is required.");
 
-  const parentBranch = args.parentBranch || currentBranch(rootDir) || `${type}/${scope}-${slug}-${issueId.toLowerCase()}`;
+  const inferredBranch = args.parentBranch || currentBranch(rootDir);
+  if (!inferredBranch) {
+    throw new Error("`--parent-branch` is required when the current branch cannot be inferred. Use the canonical Linear mother branch.");
+  }
+  if (!args.parentBranch && looksLikeSliceBranch(inferredBranch)) {
+    throw new Error("Current branch looks like a slice branch. Pass `--parent-branch` with the canonical Linear mother branch.");
+  }
+
+  const parentBranch = inferredBranch;
   const integrationBranch = args.integrationBranch || parentBranch;
 
   const { templateContent } = await readTemplate(rootDir);
@@ -174,6 +198,8 @@ async function runCli(argv) {
     .replaceAll("{{ISSUE_ID}}", issueId)
     .replaceAll("{{OWNER}}", args.owner)
     .replaceAll("{{PARENT_BRANCH}}", parentBranch)
+    .replaceAll("{{PROBLEM_ARTIFACT_PATH}}", args.problemArtifactPath || "TBD")
+    .replaceAll("{{SOLUTION_ARTIFACT_PATH}}", args.solutionArtifactPath || "TBD")
     .replaceAll("{{PR_REFERENCE}}", args.prReference || "TBD")
     .replaceAll("{{INTEGRATION_BRANCH}}", integrationBranch)
     .replaceAll("{{SLICE_ROWS}}", renderSliceRows(args.slices))
@@ -181,6 +207,8 @@ async function runCli(argv) {
     .replaceAll("{{INTEGRATION_COMMIT_ITEMS}}", renderBulletList(args.integrationCommits))
     .replaceAll("{{EXECUTION_ORDER}}", renderOrderedList(args.executionOrder))
     .replaceAll("{{RISK_ITEMS}}", renderBulletList(args.risks))
+    .replaceAll("{{OPEN_TECHNICAL_QUESTIONS}}", renderBulletList(args.openTechnicalQuestions))
+    .replaceAll("{{TOOLING_CHANGES}}", renderBulletList(args.toolingChanges))
     .replaceAll("{{COMPLETION_GATE_ITEMS}}", renderBulletList(args.completionGates));
 
   const outputPath = path.join(rootDir, "docs", "linear-context.md");
