@@ -41,7 +41,17 @@ Rules:
 5. If an additional integration layer is needed, it must still point back to the parent Linear branch in docs and PR traceability.
 6. Multi-slice initiatives must include an explicit documentation slice so canonical docs and feature-note work are reviewed independently from code-heavy slices.
 7. The documentation slice must branch from the canonical mother branch like any other slice; do not hide documentation-only governance changes inside the mother branch without a slice when the initiative is running in slice mode.
-8. When work is documented in Linear, the parent issue must include commit traceability, not only branch and PR traceability.
+8. The documentation slice must create or update the parent initiative artifacts before implementation slices begin:
+   - problem artifact first
+   - solution artifact second
+9. The documentation slice owns RFC creation or RFC update when the initiative requires RFC traceability.
+10. The solution artifact must be decision-complete for each implementation slice it unlocks. If a material technical question is unresolved, the corresponding implementation slice must not start yet.
+11. When work is documented in Linear, the parent issue must include commit traceability, not only branch and PR traceability.
+12. If the initiative introduces new tooling, the solution artifact must explicitly list:
+   - package dependencies
+   - scripts
+   - config/setup files
+   - the slice where that tooling lands
 
 Branch naming examples:
 - `feature/app-auth-shell`
@@ -84,6 +94,13 @@ PR must include:
 - validation section
 - feature note path under `/docs/features/*.md` for qualifying feature, fix, or refactor work
 - parent Linear branch reference when the work belongs to a sliced mother issue
+
+For sliced work, PR context should also make clear whether the slice is:
+
+- documentation-only
+- governance-only
+- implementation
+- browser/QA hardening
 
 Linear issue documentation for sliced work must include:
 - mother branch

@@ -7,6 +7,9 @@
 - Owner: `<owner>`
 - Created: `<YYYY-MM-DD>`
 - Last Updated: `<YYYY-MM-DD>`
+- Language Coverage: `bilingual` (`bilingual | exception-documented`)
+- Mother Branch: `<mother-branch>`
+- Documentation Slice: `<documentation-slice>`
 
 ## Context
 - Problem:
@@ -19,6 +22,9 @@
 - Technical design:
 - Alternatives considered:
 - Tradeoffs:
+- Explicit technical decisions:
+- Open technical questions requiring user decision:
+- Tooling changes:
 
 ## Critique
 - Reviewer(s):
@@ -55,5 +61,7 @@
 
 ## Traceability
 - Related issue(s):
+- Problem artifact:
+- Solution artifact:
 - Related PR(s):
 - Final commit hash(es):
