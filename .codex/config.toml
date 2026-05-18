@@ -1,6 +1,2 @@
-[mcp_servers.helius]
-args = ["helius-mcp@latest"]
-command = "npx"
-
-[mcp_servers.solana-mcp-server]
-url = "https://mcp.solana.com/mcp"
+# DIGIT keeps .codex configuration domain-aligned with the repository.
+# Tool-specific routing should live in task-local governance and scripts, not in stale external MCP entries.
