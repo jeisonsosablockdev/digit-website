@@ -11,6 +11,9 @@
 ## Hard Constraints
 - `docs/governance/*` remains the single source of truth; `AGENTS.md` and `.codex/*` only reference or compress it.
 - Update required canonical docs by impacted scope before completion.
+- Non-trivial features and fixes require both a problem artifact and a solution artifact.
+- Solution artifacts must be decision-complete before implementation slices begin.
+- Required operational documentation and traceability must remain aligned in English and Spanish.
 - RFC structure, status values, and traceability must follow the documentation policy, templates, and enforcement scripts.
 - Qualifying product changes still need at least one `/docs/features/*.md` update.
 - Any docs validation failure blocks completion.

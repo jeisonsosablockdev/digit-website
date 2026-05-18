@@ -40,6 +40,7 @@
 
 ## Definition of Done
 - `npm run validate`
+- `npm run validate:orchestration`
 - Database-backed schema or persistence changes: tracked migrations applied, no pending tracked migrations, and `validate:db` passes when `DATABASE_URL` is available
 - Required docs updated per `docs/governance/documentation-policy.md`
 - Required PR/RFC metadata still aligns with `docs/governance/pr-policy-source-of-truth.json`
