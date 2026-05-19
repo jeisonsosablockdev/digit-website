@@ -27,6 +27,49 @@ function walkTsx(dirPath, fileList = []) {
   return fileList;
 }
 
+function resolveLocalImport(sourceFile, specifier) {
+  const relativeSpecifier = specifier.startsWith("@/")
+    ? path.join(rootDir, specifier.slice(2))
+    : path.resolve(path.dirname(sourceFile), specifier);
+  const candidates = [
+    relativeSpecifier,
+    `${relativeSpecifier}.ts`,
+    `${relativeSpecifier}.tsx`,
+    `${relativeSpecifier}.js`,
+    `${relativeSpecifier}.jsx`,
+    path.join(relativeSpecifier, "index.ts"),
+    path.join(relativeSpecifier, "index.tsx"),
+    path.join(relativeSpecifier, "index.js"),
+    path.join(relativeSpecifier, "index.jsx")
+  ];
+
+  return candidates.find((candidate) => fs.existsSync(candidate)) ?? null;
+}
+
+function collectRouteSources(entryFile, visited = new Set()) {
+  const resolvedEntry = path.resolve(entryFile);
+  if (visited.has(resolvedEntry)) return visited;
+  visited.add(resolvedEntry);
+
+  const source = fs.readFileSync(resolvedEntry, "utf8");
+  const importRegex =
+    /import\s+(?:type\s+)?(?:[\w*\s{},]+\s+from\s+)?["']([^"']+)["'];?/g;
+
+  for (const match of source.matchAll(importRegex)) {
+    const specifier = match[1];
+    if (!specifier.startsWith("./") && !specifier.startsWith("../") && !specifier.startsWith("@/")) {
+      continue;
+    }
+
+    const importedFile = resolveLocalImport(resolvedEntry, specifier);
+    if (importedFile) {
+      collectRouteSources(importedFile, visited);
+    }
+  }
+
+  return visited;
+}
+
 const layoutPath = "app/layout.tsx";
 if (!exists(layoutPath)) {
   errors.push("Missing app/layout.tsx.");
@@ -41,6 +84,9 @@ if (!exists(layoutPath)) {
   if (/^["']use client["'];?/m.test(layoutSource)) {
     errors.push("app/layout.tsx cannot be a client component.");
   }
+  if (/fonts\.googleapis\.com/i.test(layoutSource)) {
+    errors.push("app/layout.tsx should avoid external Google Fonts stylesheet delivery. Prefer next/font or local assets.");
+  }
 }
 
 if (!exists("app/robots.ts") && !exists("public/robots.txt")) {
@@ -54,13 +100,19 @@ if (!exists("app/sitemap.ts")) {
 const tsxFiles = walkTsx(appDir);
 const pageFiles = tsxFiles.filter((filePath) => filePath.endsWith(`${path.sep}page.tsx`));
 for (const pageFile of pageFiles) {
-  const source = fs.readFileSync(pageFile, "utf8");
   const relative = path.relative(rootDir, pageFile);
-  const h1Count = (source.match(/<h1[\s>]/g) || []).length;
+  const routeSources = [...collectRouteSources(pageFile)].map((filePath) =>
+    fs.readFileSync(filePath, "utf8")
+  );
+  const h1Count = routeSources.reduce(
+    (count, source) => count + (source.match(/<h1[\s>]/g) || []).length,
+    0
+  );
   if (h1Count !== 1) {
     errors.push(`${relative} must contain exactly one <h1>. Found ${h1Count}.`);
   }
-  if (/^["']use client["'];?/m.test(source)) {
+  const pageSource = fs.readFileSync(pageFile, "utf8");
+  if (/^["']use client["'];?/m.test(pageSource)) {
     errors.push(`${relative} should not be a client component unless explicitly justified.`);
   }
 }
