@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { BlankRoutePage } from "@/components/site-shell";
+import { BlankRoutePage } from "@/components/blank-route-page";
 
 export const metadata: Metadata = {
   title: "Membresia | DIGIT Trading Academy",
@@ -10,9 +10,5 @@ export const metadata: Metadata = {
 };
 
 export default function MembresiaPage() {
-  return (
-    <BlankRoutePage currentPath="/membresia" title="Membresia">
-      <h1 className="sr-only">Membresia</h1>
-    </BlankRoutePage>
-  );
+  return <BlankRoutePage currentPath="/membresia" title="Membresia" />;
 }

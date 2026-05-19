@@ -1,6 +1,6 @@
 # Auth Flow
 
-Last Updated: 2026-05-15 UTC
+Last Updated: 2026-05-19 UTC
 
 ## Current State
 
@@ -10,6 +10,7 @@ Last Updated: 2026-05-15 UTC
 - Los CTAs visibles son de presentacion y no ejecutan login.
 - La ruta `/iniciar-sesion` existe solo como placeholder visual y todavia no implementa credenciales ni flujo de acceso.
 - La home publica ahora incorpora baseline inicial de metadata, robots y sitemap como parte del delivery frontend.
+- `DIG-8` modulariza la home publica y endurece la entrega inicial sin introducir cambios de autenticacion, cookies, tokens ni decisiones de autoridad en cliente.
 
 ## Notes
 
