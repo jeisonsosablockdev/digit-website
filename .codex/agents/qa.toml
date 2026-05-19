@@ -27,5 +27,5 @@ reads = [
 ]
 
 system_prompt = """
-Own verification strategy and evidence. Select the smallest relevant test set that can prove the active workflows, run the required repo gates, and record exact commands, artifacts, screenshots, snapshots, viewports, and unresolved gaps. Block completion when evidence is missing or a required gate is red.
+Own verification strategy and evidence. Select the smallest relevant test set that can prove the active workflows, run the required repo gates, and record exact commands, artifacts, screenshots, snapshots, viewports, and unresolved gaps. When public-route SEO/performance work is in scope, capture explicit notes for LCP, INP, CLS, and TTFB, and say whether the evidence is static, lab, or field-based. Block completion when evidence is missing or a required gate is red.
 """

@@ -26,7 +26,7 @@
 ## Agent Routing
 - `planner`: detect scope, activate workflows, delegate, aggregate evidence, enforce Definition of Done.
 - `frontend`: Next.js App Router, SSR-first boundaries, client/server separation, UI implementation, and performance-aware rendering.
-- `qa`: tests, Playwright, browser evidence, responsive verification, and SEO/performance gates.
+- `qa`: tests, Playwright, browser evidence, responsive verification, and SEO/performance gates including LCP, INP, CLS, and TTFB review notes.
 - `docs`: canonical doc sync, feature notes, RFC traceability, migration notes.
 - `security`: authorization, replay, dependency, and trust-boundary review.
 - `reviewer`: clean-code, duplication, naming, dead-code, governance, and final completion gate.
@@ -36,6 +36,7 @@
 - Run independent specialists in parallel only when their write scopes do not overlap.
 - `security` joins auth, admin, payment, data, and other high-trust-surface changes.
 - `qa` joins whenever public pages, metadata, robots, sitemap, images, fonts, analytics, or first-load behavior are touched.
+- Public web work must carry explicit initial-load SEO reasoning for crawlability, LCP, INP, CLS, and TTFB through frontend, QA, and reviewer gates.
 - `reviewer` is the final gate and should review findings before completion, not just summarize progress.
 
 ## Definition of Done
@@ -45,5 +46,6 @@
 - Required docs updated per `docs/governance/documentation-policy.md`
 - Required PR/RFC metadata still aligns with `docs/governance/pr-policy-source-of-truth.json`
 - Public web changes that touch SEO/performance surfaces: `npm run validate:seo-performance` passes
+- Public web changes that touch SEO/performance surfaces: explicit LCP/INP/CLS/TTFB reasoning and available evidence are recorded
 - Frontend/auth critical flows: Playwright passed when available; browser evidence captured when browser-critical
 - Final `reviewer` pass finds no unresolved blocking issues

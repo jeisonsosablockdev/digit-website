@@ -5,6 +5,10 @@ const path = require("node:path");
 const rootDir = process.cwd();
 const appDir = path.join(rootDir, "app");
 const errors = [];
+const sourceDirs = [
+  path.join(rootDir, "app"),
+  path.join(rootDir, "components")
+];
 
 function read(relativePath) {
   return fs.readFileSync(path.join(rootDir, relativePath), "utf8");
@@ -89,6 +93,13 @@ if (!exists(layoutPath)) {
   }
 }
 
+const nextConfigPath = ["next.config.ts", "next.config.js", "next.config.mjs"].find((candidate) =>
+  exists(candidate)
+);
+if (!nextConfigPath) {
+  errors.push("Missing next.config.* file for delivery policy review.");
+}
+
 if (!exists("app/robots.ts") && !exists("public/robots.txt")) {
   errors.push("Missing robots definition: add app/robots.ts or public/robots.txt.");
 }
@@ -97,7 +108,7 @@ if (!exists("app/sitemap.ts")) {
   errors.push("Missing app/sitemap.ts.");
 }
 
-const tsxFiles = walkTsx(appDir);
+const tsxFiles = sourceDirs.flatMap((dirPath) => walkTsx(dirPath));
 const pageFiles = tsxFiles.filter((filePath) => filePath.endsWith(`${path.sep}page.tsx`));
 for (const pageFile of pageFiles) {
   const relative = path.relative(rootDir, pageFile);
@@ -122,6 +133,9 @@ for (const filePath of tsxFiles) {
   const relative = path.relative(rootDir, filePath);
   if (/<script(?![^>]*type=["']application\/ld\+json["'])/i.test(source)) {
     errors.push(`${relative} contains a raw <script> tag. Use controlled SEO/script patterns instead.`);
+  }
+  if (/<link[^>]+rel=["']stylesheet["'][^>]+href=["']https?:\/\//i.test(source)) {
+    errors.push(`${relative} contains an external stylesheet link. Avoid blocking external stylesheet delivery on public surfaces.`);
   }
   if (/<img[\s>]/i.test(source)) {
     errors.push(`${relative} contains raw <img>. Prefer next/image on public surfaces.`);
