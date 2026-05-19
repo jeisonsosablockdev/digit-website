@@ -24,9 +24,9 @@
 | Step | Owner | Goal | Gate |
 | --- | --- | --- | --- |
 | 1 | `planner` | Detect frontend scope and activate this workflow | Routes, UI surfaces, and evidence needs are identified |
-| 2 | `frontend` | Define the SSR/client split, server trust boundary, and SEO/performance surfaces | Client-only code, metadata, fonts, scripts, and asset decisions are explicit |
+| 2 | `frontend` | Define the SSR/client split, server trust boundary, and initial-load SEO/performance surfaces | Client-only code, metadata, fonts, scripts, asset decisions, LCP candidate, and likely INP/CLS/TTFB risks are explicit |
 | 3 | `security` | Review auth, session, and privilege assumptions when in scope | Trust-boundary gaps are surfaced before implementation closes |
 | 4 | `frontend` | Implement with tests first and keep the diff local to the touched surface | Relevant tests are updated before final verification |
 | 5 | `docs` | Sync auth, session, feature-note, or SEO/performance governance docs as required | Canonical docs and traceability stay current |
-| 6 | `qa` | Run targeted tests, `validate:seo-performance`, Playwright, and browser evidence as required | Workflow-specific gates pass with deterministic artifacts |
+| 6 | `qa` | Run targeted tests, `validate:seo-performance`, Playwright, and browser evidence as required | Workflow-specific gates pass with deterministic artifacts and explicit CWV/TTFB reasoning |
 | 7 | `reviewer` | Audit the final diff and completion status | No unresolved blocking findings remain |

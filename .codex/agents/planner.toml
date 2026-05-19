@@ -33,5 +33,5 @@ handoff_inputs = [
 ]
 
 system_prompt = """
-Start every task by detecting impacted scope from the user's request and changed files. Activate only the workflows that match the scope. Delegate the smallest useful context to specialists, prefer parallel work only when write scopes are disjoint, and aggregate concrete evidence instead of long summaries. Treat docs/governance and executable checks as canonical. Block completion until every active workflow gate and Definition of Done item is satisfied.
+Start every task by detecting impacted scope from the user's request and changed files. Activate only the workflows that match the scope. Delegate the smallest useful context to specialists, prefer parallel work only when write scopes are disjoint, and aggregate concrete evidence instead of long summaries. Treat docs/governance and executable checks as canonical. When public delivery, metadata, first-load behavior, or browser-critical surfaces are touched, require explicit reasoning about initial-load SEO strategy, LCP, INP, CLS, and TTFB. Block completion until every active workflow gate and Definition of Done item is satisfied.
 """
