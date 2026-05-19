@@ -1,7 +1,7 @@
 # Fix: Landing Home Modularizacion Hardening SEO Performance
 
 Last Updated: 2026-05-19 UTC
-Status: planned
+Status: in progress
 Owner: app workflow
 Related Solution Artifact: `docs/fixes/fix-landing-home-modularizacion-hardening-seoperformance-implementation.md`
 
@@ -9,8 +9,9 @@ Related Solution Artifact: `docs/fixes/fix-landing-home-modularizacion-hardening
 
 - mother branch created: `jeisonsosablockdev/dig-8-fix-landing-home-modularizacion-hardening-seoperformance`
 - documentation slice created: `fix/docs-landing-home-modularizacion-hardening-seoperformance-dig-8-s00-documentation`
-- landing implementation still lives mostly in `app/page.tsx`
-- SEO/performance validation exists, but it is mostly structural today
+- implementation slice created: `fix/app-landing-home-modularizacion-hardening-seoperformance-dig-8-s01-home-structure`
+- `S01` modularized the landing and absorbed the planned SEO/performance hardening and QA evidence work
+- the remaining process step is integration back into the mother branch and Linear traceability update
 
 ## ES
 

@@ -25,3 +25,4 @@ Last Updated: 2026-05-19 UTC
 - El detalle de implementación vive en `docs/fixes/fix-landing-home-modularizacion-hardening-seoperformance-implementation.md`.
 - Esta note existe para cumplir el gate actual de `docs/features` y como capa compartida de trazabilidad.
 - `S00` ya dejó creados los artefactos base y esta slice implementa la primera entrega técnica del fix.
+- `S01` absorbió el trabajo originalmente planeado para `S02` y `S03` porque modularización, performance hardening y QA responsive quedaron acoplados sobre la misma superficie.

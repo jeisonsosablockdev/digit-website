@@ -1,7 +1,7 @@
 # Fix Implementation: Landing Home Modularizacion Hardening SEO Performance
 
 Last Updated: 2026-05-19 UTC
-Status: planned
+Status: in progress
 Owner: app workflow
 Related Problem Artifact: `docs/fixes/fix-landing-home-modularizacion-hardening-seoperformance.md`
 Linear Issue: `DIG-8`
@@ -12,8 +12,11 @@ Documentation Slice: `fix/docs-landing-home-modularizacion-hardening-seoperforma
 
 - mother branch created
 - documentation slice created
-- landing is still monolithic in `app/page.tsx`
-- current SEO/performance validation is structural and does not directly cover first-load risk
+- `S01` implemented on `fix/app-landing-home-modularizacion-hardening-seoperformance-dig-8-s01-home-structure`
+- home modularized into SSR components
+- external icon stylesheet removed from `app/layout.tsx`
+- Playwright home coverage and responsive checks are runnable inside the repo
+- SEO/performance validation now covers composed route trees and blocks external Google Fonts stylesheet delivery in layout
 
 ## ES
 
@@ -45,30 +48,35 @@ Implementar el fix para que:
 
 La iniciativa se ejecutará en slices porque combina documentación, frontend, QA y trazabilidad.
 
-Orden:
+Orden original:
 
 1. documentación base y trazabilidad
 2. modularización del landing
 3. hardening de SEO/performance inicial
 4. QA, evidencia responsive y validaciones finales
 
+Decisión ejecutada:
+
+- `S01` absorbió el trabajo planeado para `S02` y `S03`
+- la modularización, el hardening de delivery inicial y la evidencia QA resultaron demasiado acoplados sobre la misma superficie pública como para justificar slices artificialmente separados
+- no se abrirán `S02` ni `S03` como ramas formales a menos que aparezca trabajo nuevo no cubierto por `S01`
+
 ## Atomic Slice Plan
 
 | Slice | Branch | Objective | Scope | Tests First | Validation | Exit Gate |
 | --- | --- | --- | --- | --- | --- | --- |
-| S00 | `fix/docs-landing-home-modularizacion-hardening-seoperformance-dig-8-s00-documentation` | Crear artefactos base y traceability | `docs/fixes/*`, `docs/features/*` | No | `npm run validate:docs-governance` | Artefactos problem/solution presentes |
-| S01 | `fix/app-landing-home-modularizacion-hardening-seoperformance-dig-8-s01-home-structure` | Separar home en componentes SSR | `app/page.tsx`, `components/**`, tests asociados | Sí | `npm test`, `npm run build` | Home modular y sin regresión funcional |
-| S02 | `fix/app-landing-home-modularizacion-hardening-seoperformance-dig-8-s02-seo-performance-hardening` | Endurecer carga inicial y validación | `app/layout.tsx`, `scripts/ci/validate-seo-performance.js`, docs y tests asociados | Sí | `npm test`, `npm run validate:seo-performance`, `npm run build` | Riesgos críticos revisados y gate reforzado |
-| S03 | `fix/app-landing-home-modularizacion-hardening-seoperformance-dig-8-s03-qa-evidence` | Ejecutar QA responsive, Playwright y cierre | `e2e/**`, evidencia y docs de traceability | Sí cuando aplique | `npm run test:e2e`, `npm run validate` | Frontend cycle cerrado sin bloqueantes |
+| S00 | `fix/docs-landing-home-modularizacion-hardening-seoperformance-dig-8-s00-documentation` | Crear artefactos base y traceability | `docs/fixes/*`, `docs/features/*` | No | `npm run validate:docs-governance` | Completado |
+| S01 | `fix/app-landing-home-modularizacion-hardening-seoperformance-dig-8-s01-home-structure` | Modularizar home SSR y absorber hardening + QA de delivery inicial | `app/page.tsx`, `components/**`, `app/layout.tsx`, `scripts/ci/validate-seo-performance.js`, `e2e/**`, `playwright.config.ts` | Sí | `npm run test`, `npm run build`, `npm run validate:seo-performance`, `npm run test:e2e`, `npm run validate` | Completado |
+| S02 | No abierto | Trabajo absorbido por `S01` | N/A | N/A | N/A | Cerrado por consolidación |
+| S03 | No abierto | Trabajo absorbido por `S01` | N/A | N/A | N/A | Cerrado por consolidación |
 
 ## Slice Dependencies And Merge Order
 
-- `S00` debe existir antes de cualquier slice de implementación.
-- `S01` depende de `S00`.
-- `S02` depende de `S01`.
-- `S03` depende de `S01` y `S02`.
-- cada slice mergea de vuelta a la mother branch
-- el PR final a `develop` solo ocurre cuando la mother branch integra todos los slices aprobados
+- `S00` existió antes del slice de implementación.
+- `S01` dependió de `S00`.
+- `S02` y `S03` quedaron absorbidos por `S01`.
+- el siguiente paso operativo es integrar `S01` de vuelta a la mother branch.
+- el PR final a `develop` solo ocurre cuando la mother branch integra el trabajo aprobado.
 
 ## Technical Decisions
 
@@ -92,18 +100,8 @@ Orden:
 - actualizar o añadir test de render para la home si hace falta validar composición
 - mantener Playwright mínimo de render/CTA para la home
 - verificar que la separación a componentes no cambia el `<h1>` ni la CTA principal
-
-### S02 SEO/Performance Hardening
-
-- añadir pruebas del validador si cambia la lógica de `validate-seo-performance`
-- comprobar que la home sigue pasando build y reglas SEO base
-- revisar explícitamente metadata, `use client`, fuentes, iconografía e imágenes
-
-### S03 QA Evidence
-
-- ejecutar Playwright sobre la home
-- validar widths `320`, `375`, `768`, `1024`
-- registrar resultado de overflow, CTA visible y estabilidad visual básica
+- absorber el hardening de `app/layout.tsx` y `validate-seo-performance`
+- absorber Playwright sobre la home y widths `320`, `375`, `768`, `1024`
 - cerrar con `npm run validate` y `npm run validate:orchestration`
 
 ## Docs And Traceability
@@ -112,6 +110,7 @@ Orden:
 - actualizar al menos una note bajo `docs/features/*.md`
 - documentar mother branch, slices y commits en Linear
 - si el hardening cambia reglas compartidas de performance del repo, actualizar también `docs/governance/seo-performance-policy.md`
+- registrar explícitamente en Linear que `S01` absorbió `S02` y `S03`
 
 ## EN
 
