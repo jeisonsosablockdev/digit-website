@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { BlankRoutePage } from "@/components/site-shell";
+import { BlankRoutePage } from "@/components/blank-route-page";
 
 export const metadata: Metadata = {
   title: "Elite | DIGIT Trading Academy",
@@ -10,9 +10,5 @@ export const metadata: Metadata = {
 };
 
 export default function ElitePage() {
-  return (
-    <BlankRoutePage currentPath="/elite" title="Elite">
-      <h1 className="sr-only">Elite</h1>
-    </BlankRoutePage>
-  );
+  return <BlankRoutePage currentPath="/elite" title="Elite" />;
 }

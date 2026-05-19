@@ -16,11 +16,13 @@ Last Updated: 2026-05-19 UTC
 
 ## Active Slice
 
-- Slice: `fix/docs-landing-home-modularizacion-hardening-seoperformance-dig-8-s00-documentation`
-- Objective: crear artefacto de problema, artefacto de solución y traceability mínima para desbloquear la implementación
+- Slice: `fix/app-landing-home-modularizacion-hardening-seoperformance-dig-8-s01-home-structure`
+- Objective: modularizar la home en componentes SSR, eliminar dependencia externa de iconografía y dejar QA responsive ejecutable en el repo
 
 ## Notes
 
 - El detalle del problema vive en `docs/fixes/fix-landing-home-modularizacion-hardening-seoperformance.md`.
 - El detalle de implementación vive en `docs/fixes/fix-landing-home-modularizacion-hardening-seoperformance-implementation.md`.
 - Esta note existe para cumplir el gate actual de `docs/features` y como capa compartida de trazabilidad.
+- `S00` ya dejó creados los artefactos base y esta slice implementa la primera entrega técnica del fix.
+- `S01` absorbió el trabajo originalmente planeado para `S02` y `S03` porque modularización, performance hardening y QA responsive quedaron acoplados sobre la misma superficie.
