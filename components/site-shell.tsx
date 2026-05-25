@@ -17,11 +17,7 @@ export function SiteShell({
       <header className="glass-effect sticky top-0 z-50 border-b border-white/5 bg-black/70">
         <div className="mx-auto max-w-[1280px] px-4 py-4 sm:px-6">
           <div className="relative flex items-center gap-3 pr-24 xl:hidden">
-            <MobileNavigationMenu
-              currentPath={currentPath}
-              navClassName="absolute left-0 top-[calc(100%+12px)] w-[min(22rem,calc(100vw-3rem))] border border-white/5 bg-black/95 p-4 shadow-2xl shadow-black/40"
-              summaryClassName="interactive-scale inline-flex h-11 w-11 cursor-pointer list-none items-center justify-center rounded-full border border-white/15 bg-white/10 text-white transition-colors hover:border-primary [&::-webkit-details-marker]:hidden"
-            />
+            <MobileNavigationMenu currentPath={currentPath} variant="shell" />
             <Link
               className="min-w-0 truncate whitespace-nowrap font-headline text-lg font-bold tracking-tight sm:text-xl"
               href="/"
