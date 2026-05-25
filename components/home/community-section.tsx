@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+const communitySignals = ["ANALISIS SEMANALES", "Sesiones en vivo", "COMUNIDAD PRIVADA"] as const;
+
 export function CommunitySection() {
   return (
     <section className="bg-background px-6 py-20" id="newsletter-section">
@@ -18,22 +20,25 @@ export function CommunitySection() {
             Únete a 20k+ Traders
           </h2>
           <p className="mb-10 px-4 font-body text-base leading-relaxed text-on-surface-variant">
-            Recibe análisis de mercado semanales y señales de trading exclusivas directamente en tu
-            bandeja de entrada.
+            Accede al entorno donde compartimos análisis, sesiones en vivo y recursos para seguir
+            profundizando tu proceso.
           </p>
-          <div className="space-y-4">
-            <div className="relative">
-              <input
-                className="w-full rounded-full border border-white/10 bg-white/5 px-6 py-4 font-body text-white placeholder:text-on-surface-variant/50 focus:border-primary/50 focus:outline-none"
-                placeholder="Ingresa tu correo"
-                type="email"
-              />
+          <div className="space-y-5">
+            <div className="flex flex-wrap justify-center gap-3">
+              {communitySignals.map((signal) => (
+                <span
+                  key={signal}
+                  className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-utility font-semibold uppercase tracking-[0.18em] text-white/70"
+                >
+                  {signal}
+                </span>
+              ))}
             </div>
             <Link
               className="interactive-scale block w-full rounded-full bg-white py-4 text-center font-headline font-bold text-black shadow-[0_0_20px_rgba(255,255,255,0.1)] transition-transform"
               href="/recursos"
             >
-              Unirse a la Comunidad
+              Explorar recursos de la comunidad
             </Link>
           </div>
         </div>
