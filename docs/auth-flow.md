@@ -13,6 +13,8 @@ Last Updated: 2026-05-25 UTC
 - `DIG-8` modulariza la home publica y endurece la entrega inicial sin introducir cambios de autenticacion, cookies, tokens ni decisiones de autoridad en cliente.
 - La rama `redesign-ui` reemplaza la narrativa visual de la home con una composicion mobile-first inspirada en Stitch, pero mantiene la misma naturaleza publica SSR y no agrega formularios, credenciales, callbacks de auth ni almacenamiento de identidad.
 - La iteracion actual de `redesign-ui` aproxima la home al export de Stitch de forma mucho mas literal, incluyendo top app bar, slider hero, CTA stack, secciones editoriales y bottom nav visual, sin convertir ninguno de esos controles en auth real.
+- El fix `home-web-modern-layout` transforma la lectura desktop de la home hacia una landing web moderna, pero conserva intactos los limites de confianza: no agrega formularios de login reales, tokens, cookies, callbacks de proveedor ni middleware de autorizacion.
+- La navegacion superior desktop y los CTA visibles siguen apuntando a rutas publicas o placeholders SSR; `/iniciar-sesion` continua siendo una superficie de entrada visual sin credenciales ni intercambio de identidad.
 
 ## Notes
 

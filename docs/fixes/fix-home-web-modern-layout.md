@@ -1,16 +1,16 @@
 # Fix: Home Web Modern Layout
 
 Last Updated: 2026-05-25 UTC
-Status: in progress
+Status: implemented
 Owner: app workflow
 Related Solution Artifact: `docs/fixes/fix-home-web-modern-layout-implementation.md`
 
 ## Current State
 
 - mother branch created: `codex/fix-home-web-modern-layout`
-- documentation slice created: `codex/fix-home-web-modern-layout-s00-docs`
-- implementation slices have not been opened yet
-- the public home currently preserves a strong mobile-first app shell even on desktop widths
+- slices `S00`, `S01` y `S02` implementadas y mergeadas a la mother branch
+- `S03` reservado para trazabilidad final, responsive QA y cierre de validación
+- la home ya conserva mobile como baseline y presenta una lectura web moderna en desktop
 
 ## ES
 
@@ -58,6 +58,32 @@ Este fix cubre:
 - reflujo de secciones `Structure`, `Architecture`, `Community`, `Manifesto` y `Membership`
 - responsive QA para asegurar que mobile no se degrade
 - trazabilidad documental y feature note
+
+## Execution Summary
+
+- `S00` documentó el problema, la solución y la nota de feature
+- `S01` transformó shell y hero a un patrón web moderno en desktop, conservando carrusel y navegación mobile
+- `S02` adaptó `Structure`, `Architecture`, `Community`, `Manifesto` y `Membership` a composiciones desktop con grids y bloques editoriales
+- `S03` cierra la trazabilidad, evidencia responsive y revisión explícita de `LCP`, `INP`, `CLS` y `TTFB`
+
+## Delivered Outcome
+
+La home pública ahora:
+
+- conserva el estilo mobile actual en `320`, `375` y rangos cercanos
+- usa navegación superior web e hero split-layout en `1024+`
+- elimina la dependencia visual de la bottom nav en desktop
+- escala secciones internas con composición web moderna sin cambiar el tono visual DIGIT
+- mantiene una entrega SSR-first sin introducir fetches o JS cliente adicionales
+
+## Evidence
+
+- responsive captures:
+  - `tmp/qa/home-web-modern-layout/home-320.png`
+  - `tmp/qa/home-web-modern-layout/home-375.png`
+  - `tmp/qa/home-web-modern-layout/home-768.png`
+  - `tmp/qa/home-web-modern-layout/home-1024.png`
+  - `tmp/qa/home-web-modern-layout/home-1440.png`
 
 ## Non-Goals
 

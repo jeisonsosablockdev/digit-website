@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 
 test("homepage shell renders primary CTA", async ({ page }) => {
   await page.goto("/");
-  await expect(page.getByText("DIGIT TRADING")).toBeVisible();
+  await expect(page.getByRole("link", { name: "DIGIT TRADING" })).toBeVisible();
   await expect(page.getByRole("link", { name: "Entrar a DIGIT" }).first()).toBeVisible();
 });
 

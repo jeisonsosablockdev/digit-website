@@ -5,7 +5,7 @@ import { HomePageSections } from "@/components/home/home-page";
 export const metadata: Metadata = {
   title: "DIGIT Trading Academy - Plataforma integral",
   description:
-    "Experiencia mobile-first inspirada en Stitch para traders que buscan estructura, rendimiento y comunidad.",
+    "Landing web moderna para traders que buscan estructura, rendimiento y comunidad dentro del ecosistema DIGIT.",
   alternates: {
     canonical: "/"
   }
