@@ -34,7 +34,7 @@ export function SiteShell({
         <div className="mx-auto max-w-[1280px] px-4 py-4 sm:px-6">
           <div className="relative flex items-center gap-3 pr-24 xl:hidden">
             <details className="group relative shrink-0">
-              <summary className="interactive-scale inline-flex h-10 w-10 cursor-pointer list-none items-center justify-center rounded-full border border-white/15 bg-white/10 text-white transition-colors hover:border-primary">
+              <summary className="interactive-scale inline-flex h-11 w-11 cursor-pointer list-none items-center justify-center rounded-full border border-white/15 bg-white/10 text-white transition-colors hover:border-primary">
                 <span className="sr-only">Abrir navegacion</span>
                 <span className="relative h-4 w-5 group-open:hidden">
                   <span className="absolute left-0 top-0 h-0.5 w-5 rounded-full bg-white" />
@@ -80,7 +80,7 @@ export function SiteShell({
               <span className="hidden sm:inline">DIGIT Academy</span>
             </Link>
             <Link
-              className={`absolute right-0 top-1/2 -translate-y-1/2 rounded-full border px-3 py-2 text-xs font-medium transition-colors sm:px-4 sm:text-sm ${
+              className={`absolute right-0 top-1/2 inline-flex min-h-11 -translate-y-1/2 items-center rounded-full border px-4 py-2.5 text-sm font-medium transition-colors ${
                 isSessionEntryRoute
                   ? "border-primary bg-primary text-white"
                   : "border-white/15 bg-white/10 text-white hover:border-primary hover:bg-white/15"
@@ -119,7 +119,7 @@ export function SiteShell({
               </nav>
             </div>
             <Link
-              className={`shrink-0 rounded-full border px-4 py-2 text-sm font-medium transition-colors ${
+              className={`shrink-0 rounded-full border px-5 py-3 text-sm font-medium transition-colors ${
                 isSessionEntryRoute
                   ? "border-primary bg-primary text-white"
                   : "border-white/15 bg-white/10 text-white hover:border-primary hover:bg-white/15"

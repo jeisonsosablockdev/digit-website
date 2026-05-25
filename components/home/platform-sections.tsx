@@ -1,109 +1,55 @@
+import { architectureLayers } from "@/components/home/landing-data";
 import { Icon } from "@/components/ui/icon";
-import {
-  landingLayers,
-  libraryItems,
-  osItems
-} from "@/components/home/landing-data";
 
-export function LayersSection() {
+export function ArchitectureSection() {
   return (
-    <section className="px-6 py-16">
-      <div className="mx-auto w-full max-w-[1280px]">
-        <div className="mb-10">
-          <h2 className="mb-3 max-w-3xl font-headline text-2xl font-bold md:text-4xl">
-            Cinco capas dentro de una misma arquitectura.
+    <section className="relative overflow-hidden px-6 py-20">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-10 blur-[100px]"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(124, 77, 255, 1) 0%, transparent 70%)"
+        }}
+      />
+      <div className="mx-auto max-w-[760px]">
+        <div className="mb-14 text-center">
+          <h2 className="mb-8 font-headline text-[2rem] font-bold leading-tight tracking-[-0.05em] text-white sm:text-[2.8rem]">
+            Alcanza la rentabilidad conoce la
+            <span className="mt-2 block bg-gradient-to-r from-primary to-[#cdbdff] bg-clip-text text-transparent">
+              arquitectura
+            </span>
+            <span className="mt-3 block bg-gradient-to-r from-primary to-[#cdbdff] bg-clip-text text-[2.5rem] text-transparent sm:text-[3.2rem]">
+              DIGIT
+            </span>
           </h2>
-          <div className="h-1 w-12 rounded-full bg-primary" />
+          <p className="mx-auto max-w-xl text-base leading-relaxed text-on-surface-variant">
+            Descubre la infraestructura diseñada para potenciar tu ejecución.
+            Un ecosistema integrado para llevar tus habilidades al siguiente
+            nivel profesional.
+          </p>
         </div>
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
-          {landingLayers.map((layer) => (
-            <div
+
+        <div className="grid gap-4 md:grid-cols-2">
+          {architectureLayers.map((layer, index) => (
+            <article
               key={layer.title}
-              className="interactive-scale flex flex-col gap-4 rounded-2xl border border-white/5 bg-surface-container/40 p-6 hover:border-primary/40"
+              className={`interactive-scale rounded-[1.75rem] border border-white/6 bg-[linear-gradient(135deg,rgba(11,11,18,0.95)_0%,rgba(11,11,18,0.85)_100%)] p-8 shadow-2xl shadow-black/40 ${
+                index === architectureLayers.length - 1 ? "md:col-span-2" : ""
+              }`}
             >
               <div
-                className={`flex h-12 w-12 items-center justify-center rounded-xl border ${layer.iconColor}`}
+                className={`mb-6 flex h-12 w-12 items-center justify-center rounded-2xl border ${layer.iconClass}`}
               >
                 <Icon className="h-6 w-6" name={layer.icon} />
               </div>
-              <div>
-                <h3 className="mb-2 font-headline text-lg font-bold">
-                  {layer.title}
-                </h3>
-                <p className="text-sm leading-relaxed text-on-surface-variant">
-                  {layer.description}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-export function PlatformPreviewSection() {
-  return (
-    <section className="bg-surface-container/20 px-6 py-16">
-      <div className="mx-auto w-full max-w-[1280px]">
-        <div className="mb-10">
-          <h2 className="mb-3 max-w-3xl font-headline text-2xl font-bold md:text-4xl">
-            DIGIT OS organiza el entorno del usuario.
-          </h2>
-          <div className="mb-6 h-1 w-12 rounded-full bg-secondary" />
-          <p className="mb-8 text-sm text-on-surface-variant md:text-base">
-            Un dashboard centralizado para navegar por tu evolución como trader.
-          </p>
-        </div>
-        <div className="overflow-hidden rounded-2xl border border-white/10 bg-surface shadow-2xl shadow-primary/5 md:max-w-xl">
-          <div className="flex items-center gap-2 border-b border-white/5 bg-surface-container px-4 py-3">
-            <div className="h-2.5 w-2.5 rounded-full bg-white/20" />
-            <div className="h-2.5 w-2.5 rounded-full bg-white/20" />
-            <div className="h-2.5 w-2.5 rounded-full bg-white/20" />
-            <span className="ml-4 text-[10px] uppercase tracking-widest text-on-surface-variant/50">
-              DIGIT OS
-            </span>
-          </div>
-          <div className="grid grid-cols-2 gap-3 p-4">
-            {osItems.map(([icon, color, label]) => (
-              <div
-                key={label}
-                className="flex flex-col items-center justify-center gap-2 rounded-xl border border-white/5 bg-surface-container/50 p-4"
-              >
-                <Icon className={`h-7 w-7 ${color}`} name={icon} />
-                <span className="text-xs font-bold text-white">{label}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-export function LibrarySection() {
-  return (
-    <section className="px-6 py-16">
-      <div className="mx-auto w-full max-w-[1280px]">
-        <div className="mb-10 text-center">
-          <h2 className="mb-4 font-headline text-2xl font-bold md:text-4xl">
-            La biblioteca transforma estudio en comprensión aplicable.
-          </h2>
-          <p className="text-sm text-on-surface-variant md:text-base">
-            Recursos estratégicos para consulta y revisión continua.
-          </p>
-        </div>
-        <div className="mx-auto max-w-3xl space-y-4">
-          {libraryItems.map((item) => (
-            <div
-              key={item.label}
-              className="flex items-center gap-4 rounded-xl border border-white/5 bg-surface-container/30 p-4"
-            >
-              <Icon className={`h-6 w-6 ${item.color}`} name={item.icon} />
-              <span className="text-sm font-medium text-white md:text-base">
-                {item.label}
-              </span>
-            </div>
+              <h3 className="mb-3 font-headline text-xl font-bold tracking-tight text-white">
+                {layer.title}
+              </h3>
+              <p className="text-sm leading-relaxed text-on-surface-variant sm:text-base">
+                {layer.description}
+              </p>
+            </article>
           ))}
         </div>
       </div>

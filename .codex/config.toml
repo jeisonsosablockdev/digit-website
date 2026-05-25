@@ -1,2 +1,9 @@
 # DIGIT keeps .codex configuration domain-aligned with the repository.
-# Tool-specific routing should live in task-local governance and scripts, not in stale external MCP entries.
+# MCP entries here must stay repo-relevant and avoid checked-in secrets.
+
+[mcp_servers.stitch]
+url = "https://stitch.googleapis.com/mcp"
+required = false
+
+[mcp_servers.stitch.env_http_headers]
+"X-Goog-Api-Key" = "STITCH_API_KEY"
