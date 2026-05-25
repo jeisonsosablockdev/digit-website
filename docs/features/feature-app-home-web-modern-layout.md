@@ -30,7 +30,7 @@ Este fix convierte la home pública de un desktop con lenguaje de app mobile a u
 - `S00`: `80036d07` `docs(app): define home web modern layout fix`
 - `S01`: `0ee962f6` `feat(app): shift home shell and hero to web layout`
 - `S02`: `6150eae7` `feat(app): adapt home sections for desktop web`
-- `S03`: pending closeout commit
+- `S03`: `04271827` `docs(app): close home web modern layout validation`
 
 ## Evidence
 

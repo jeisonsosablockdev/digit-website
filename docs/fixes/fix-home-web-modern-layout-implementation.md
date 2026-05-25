@@ -77,7 +77,7 @@ Implementar un desktop/home web moderno que:
 | S00 | `codex/fix-home-web-modern-layout-s00-docs` | `80036d07` `docs(app): define home web modern layout fix` | `5754820a` `merge: home web modern layout docs` |
 | S01 | `codex/fix-home-web-modern-layout-s01-shell-hero` | `0ee962f6` `feat(app): shift home shell and hero to web layout` | `c840686d` `merge: home web modern layout s01 shell hero` |
 | S02 | `codex/fix-home-web-modern-layout-s02-sections-desktop` | `6150eae7` `feat(app): adapt home sections for desktop web` | `a417b2b4` `merge: home web modern layout s02 sections desktop` |
-| S03 | `codex/fix-home-web-modern-layout-s03-qa-docs-closeout` | pending | pending |
+| S03 | `codex/fix-home-web-modern-layout-s03-qa-docs-closeout` | `04271827` `docs(app): close home web modern layout validation` | pending |
 
 ## Tests-First Plan
 
