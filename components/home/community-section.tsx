@@ -4,8 +4,20 @@ const communitySignals = ["ANALISIS SEMANALES", "Sesiones en vivo", "COMUNIDAD P
 
 export function CommunitySection() {
   return (
-    <section className="bg-background px-6 py-20" id="newsletter-section">
-      <div className="mx-auto max-w-md">
+    <section className="bg-background px-6 py-20 lg:px-8 lg:py-28" id="newsletter-section">
+      <div className="mx-auto max-w-md lg:max-w-[1280px] lg:grid lg:grid-cols-[minmax(320px,420px)_minmax(0,1fr)] lg:items-center lg:gap-16">
+        <div className="mb-12 lg:mb-0">
+          <span className="mb-4 block text-center font-headline text-[10px] font-bold uppercase tracking-[0.4em] text-secondary lg:text-left">
+            EL CÍRCULO DIGIT
+          </span>
+          <h2 className="text-center font-headline text-4xl font-bold tracking-tight text-white lg:text-left lg:text-5xl">
+            Comunidad, contexto y práctica continua.
+          </h2>
+          <p className="mt-6 text-center font-body text-base leading-relaxed text-on-surface-variant lg:text-left lg:text-lg lg:leading-8">
+            La capa comunitaria de DIGIT conecta análisis, sesiones en vivo y recursos curados
+            para sostener una evolución más consistente en web y mobile.
+          </p>
+        </div>
         <div
           className="glass-effect relative overflow-hidden rounded-[2.5rem] border border-white/5 p-8 text-center"
           style={{

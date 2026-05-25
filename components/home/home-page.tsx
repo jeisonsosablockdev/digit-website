@@ -9,7 +9,7 @@ import { TopAppBar } from "@/components/home/top-app-bar";
 
 export function HomePageSections() {
   return (
-    <div className="min-h-screen bg-background pb-32 font-body text-on-surface selection:bg-primary/30">
+    <div className="min-h-screen bg-background pb-32 font-body text-on-surface selection:bg-primary/30 lg:pb-0">
       <TopAppBar />
       <HeroCarousel />
       <StructureSection />
