@@ -7,6 +7,7 @@ test("homepage shell renders primary CTA", async ({ page }) => {
 });
 
 test("homepage menu opens existing navigation links", async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 812 });
   await page.goto("/");
 
   await page.getByLabel("Abrir navegacion").click();
@@ -17,6 +18,7 @@ test("homepage menu opens existing navigation links", async ({ page }) => {
 });
 
 test("homepage bottom navigation routes to academy", async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 812 });
   await page.goto("/");
 
   await page.getByRole("link", { name: "Academy" }).click();
@@ -50,7 +52,11 @@ for (const viewport of responsiveViewports) {
         name: /Conviertete en TARDER ELITE/
       })
     ).toBeVisible();
-    await expect(page.getByRole("link", { name: "Home" })).toBeVisible();
+    if (viewport.width < 1024) {
+      await expect(page.getByRole("link", { name: "Home" })).toBeVisible();
+    } else {
+      await expect(page.getByRole("link", { name: "Entrar a DIGIT" }).first()).toBeVisible();
+    }
     await expect(page.getByRole("link", { name: "Entrar a DIGIT" }).first()).toBeVisible();
     await expect(
       page.getByRole("heading", {
