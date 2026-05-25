@@ -20,8 +20,8 @@ Los objetivos conectados son:
 
 ## Active Slice
 
-- Slice: `fix/app-refactor-clean-code-dig-10-s05-seo-performance-cwv`
-- Objective: cerrar validación final de SEO/performance, Web Core Vitals y trazabilidad completa de `DIG-10`
+- Slice: `completed`
+- Objective: todos los slices planeados de `DIG-10` fueron ejecutados e integrados en la mother branch
 
 ## Notes
 
