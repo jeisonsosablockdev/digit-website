@@ -1,32 +1,41 @@
-import { ActionButtons } from "@/components/home/action-buttons";
-import {
-  comparisonRows,
-  faqs,
-  footerLinks,
-  profiles
-} from "@/components/home/landing-data";
-import { Icon } from "@/components/ui/icon";
+import Link from "next/link";
 
-export function MembershipSection() {
+import { ActionButtons } from "@/components/home/action-buttons";
+import { communitySignals, footerLinks } from "@/components/home/landing-data";
+
+export function CommunitySection() {
   return (
-    <section className="px-6 py-12">
-      <div className="mx-auto max-w-[1280px]">
-        <div className="relative overflow-hidden rounded-[2rem] border border-white/5 bg-surface-container p-8 text-center">
-          <div className="absolute -left-16 -top-16 h-48 w-48 rounded-full bg-primary/10 blur-[80px]" />
-          <div className="relative z-10 mx-auto max-w-2xl">
-            <span className="mb-4 block text-[10px] font-bold uppercase tracking-[0.4em] text-secondary">
-              Acceso Total
+    <section className="bg-background px-6 py-20">
+      <div className="mx-auto max-w-[720px]">
+        <div className="glass-effect relative overflow-hidden rounded-[2.5rem] border border-white/6 bg-[linear-gradient(135deg,rgba(15,13,22,0.95)_0%,rgba(10,10,10,0.95)_100%)] p-8 text-center sm:p-10">
+          <div className="absolute -top-16 left-1/2 h-40 w-40 -translate-x-1/2 rounded-full bg-secondary/10 blur-[80px]" />
+          <div className="relative z-10">
+            <span className="mb-8 block font-headline text-[10px] font-bold uppercase tracking-[0.4em] text-secondary">
+              EL CIRCULO DIGIT
             </span>
-            <h2 className="mb-3 font-headline text-2xl font-bold text-white md:text-4xl">
-              La membresía concentra la parte activa del sistema.
+            <h2 className="mb-6 font-headline text-3xl font-bold tracking-tight text-white sm:text-4xl">
+              Únete a 20k+ Traders
             </h2>
-            <p className="mb-8 text-sm text-on-surface-variant md:text-base">
-              Accede a todas las capas de DIGIT OS, sesiones en vivo y la
-              comunidad privada.
+            <p className="mx-auto mb-8 max-w-xl text-base leading-relaxed text-on-surface-variant">
+              Recibe análisis de mercado, sesiones en vivo y acceso al entorno
+              donde la ejecución se entrena con acompañamiento real.
             </p>
-            <button className="interactive-scale w-full rounded-2xl bg-white px-6 py-4 font-headline text-base font-bold text-black md:w-auto md:min-w-[320px]">
-              Explorar la membresía
-            </button>
+            <div className="mb-8 flex flex-wrap justify-center gap-3">
+              {communitySignals.map((signal) => (
+                <span
+                  key={signal}
+                  className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-utility font-semibold uppercase tracking-[0.18em] text-white/70"
+                >
+                  {signal}
+                </span>
+              ))}
+            </div>
+            <Link
+              className="interactive-scale inline-flex min-w-[240px] items-center justify-center rounded-full bg-white px-6 py-4 font-headline text-base font-bold text-black"
+              href="/recursos"
+            >
+              Unirse a la Comunidad
+            </Link>
           </div>
         </div>
       </div>
@@ -34,132 +43,61 @@ export function MembershipSection() {
   );
 }
 
-export function ProfilesSection() {
+export function ManifestoSection() {
   return (
-    <section className="px-6 py-16">
-      <div className="mx-auto w-full max-w-[1280px]">
-        <div className="mb-10 text-center">
-          <h2 className="font-headline text-2xl font-bold md:text-4xl">
-            Diseñado para perfiles con vocación de proceso.
-          </h2>
-        </div>
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-          {profiles.map((profile) => (
-            <div
-              key={profile.title}
-              className="rounded-2xl border border-white/10 bg-background p-6"
-            >
-              <h3 className={`mb-2 font-headline font-bold ${profile.color}`}>
-                {profile.title}
-              </h3>
-              <p className="text-sm text-on-surface-variant md:text-base">
-                {profile.description}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-export function ThesisSection() {
-  return (
-    <section className="relative overflow-hidden bg-primary/5 px-6 py-20 text-center">
-      <div className="hero-bg-gradient absolute inset-0 opacity-50" />
-      <div className="relative z-10 mx-auto max-w-4xl">
-        <h2 className="mb-6 font-headline text-3xl font-bold md:text-5xl">
-          El trading como herramienta de expansión personal y financiera.
+    <section className="relative overflow-hidden px-6 py-24 text-center">
+      <div className="absolute right-0 top-1/2 -z-10 h-[320px] w-[320px] -translate-y-1/2 rounded-full bg-secondary/20 blur-[120px]" />
+      <div className="mx-auto max-w-4xl">
+        <h2 className="mb-12 font-headline text-4xl font-bold leading-[1.15] tracking-[-0.04em] text-white sm:text-5xl">
+          El trading como herramienta de
+          <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+            {" "}
+            expansión personal y financiera
+          </span>
+          .
         </h2>
-        <p className="text-lg font-medium italic text-primary md:text-2xl">
+        <p className="mx-auto max-w-3xl text-xl italic leading-relaxed text-secondary sm:text-2xl">
           &quot;Disciplina, estructura y criterio convierten la práctica en una
           base de expansión sostenida.&quot;
         </p>
-      </div>
-    </section>
-  );
-}
-
-export function ComparisonSection() {
-  return (
-    <section className="px-6 py-16">
-      <div className="mx-auto w-full max-w-[1280px]">
-        <div className="mb-10">
-          <h2 className="mb-3 font-headline text-2xl font-bold md:text-4xl">
-            La ventaja competitiva de DIGIT.
-          </h2>
-          <div className="mb-8 h-1 w-12 rounded-full bg-secondary" />
-        </div>
-        <div className="grid grid-cols-2 gap-4 text-sm">
-          <div className="col-span-2 flex border-b border-white/10 pb-2 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">
-            <div className="w-1/2">Enfoque Común</div>
-            <div className="w-1/2 text-secondary">Sistema DIGIT</div>
-          </div>
-          {comparisonRows.map(([left, right], index) => (
-            <div key={left} className="contents">
-              <div
-                className={`w-1/2 pr-2 text-on-surface-variant ${
-                  index > 0 ? "pt-4" : ""
-                }`}
-              >
-                {left}
-              </div>
-              <div
-                className={`w-1/2 border-l border-white/10 pl-2 font-medium text-white ${
-                  index > 0 ? "pt-4" : ""
-                }`}
-              >
-                {right}
-              </div>
-            </div>
-          ))}
+        <div className="mx-auto mt-12 max-w-sm">
+          <ActionButtons
+            secondaryHref="/metodo-digit"
+            secondaryLabel="Comienza tu entrenamiento"
+            primaryClassName="rounded-full"
+            secondaryClassName="rounded-full bg-[#111111]"
+          />
         </div>
       </div>
     </section>
   );
 }
 
-export function FaqSection() {
+export function MembershipSection() {
   return (
-    <section className="bg-surface-container/20 px-6 py-16">
-      <div className="mx-auto w-full max-w-[960px]">
-        <div className="mb-10">
-          <h2 className="font-headline text-2xl font-bold md:text-4xl">
-            Preguntas Frecuentes
-          </h2>
-        </div>
-        <div className="space-y-6">
-          {faqs.map((faq) => (
-            <details
-              key={faq.question}
-              className="group rounded-xl border border-white/5 bg-surface p-5 open:bg-surface-container/50"
+    <section className="bg-background px-6 py-20">
+      <div className="mx-auto max-w-[720px]">
+        <div className="relative overflow-hidden rounded-[2.5rem] border border-white/6 bg-[linear-gradient(135deg,rgba(20,20,25,1)_0%,rgba(10,10,12,1)_100%)] p-10 text-center shadow-2xl shadow-black/40">
+          <div className="absolute -left-16 -top-16 h-48 w-48 rounded-full bg-secondary/10 blur-[80px]" />
+          <div className="relative z-10">
+            <span className="mb-8 block font-headline text-[10px] font-bold uppercase tracking-[0.4em] text-secondary">
+              unete a DIGIT
+            </span>
+            <h2 className="mb-6 font-headline text-3xl font-bold leading-tight tracking-tight text-white sm:text-4xl">
+              Domina el sistema: elige tu evolución hoy.
+            </h2>
+            <p className="mx-auto mb-10 max-w-lg text-base leading-relaxed text-on-surface-variant">
+              Accede a todas las capas de DIGIT OS, formación guiada, sesiones
+              en vivo y una comunidad construida para sostener tu proceso.
+            </p>
+            <Link
+              className="interactive-scale inline-flex w-full items-center justify-center rounded-[2rem] bg-white px-6 py-5 font-headline text-base font-bold text-black shadow-xl sm:w-auto sm:min-w-[320px]"
+              href="/membresia"
             >
-              <summary className="flex list-none items-center justify-between gap-4 font-headline font-bold text-white">
-                {faq.question}
-                <Icon
-                  className="h-6 w-6 shrink-0 text-secondary transition-transform group-open:rotate-180"
-                  name="expand_more"
-                />
-              </summary>
-              <p className="mt-4 text-sm leading-relaxed text-on-surface-variant md:text-base">
-                {faq.answer}
-              </p>
-            </details>
-          ))}
+              Explorar la membresía
+            </Link>
+          </div>
         </div>
-      </div>
-    </section>
-  );
-}
-
-export function FooterCtaSection() {
-  return (
-    <section className="border-t border-white/5 px-6 py-16 text-center">
-      <div className="mx-auto max-w-xl">
-        <h2 className="mb-8 font-headline text-2xl font-bold md:text-4xl">
-          Construye una estructura que puedas sostener en el tiempo.
-        </h2>
-        <ActionButtons />
       </div>
     </section>
   );
@@ -168,15 +106,19 @@ export function FooterCtaSection() {
 export function SiteFooterSection() {
   return (
     <footer className="border-t border-white/5 bg-surface px-6 py-10 pb-24">
-      <div className="mb-8 flex flex-wrap justify-center gap-6 text-[11px] font-bold uppercase tracking-widest text-on-surface-variant">
+      <div className="mb-8 flex flex-wrap justify-center gap-6 text-[11px] font-bold uppercase tracking-[0.18em] text-on-surface-variant">
         {footerLinks.map((item) => (
-          <a key={item} className="transition-colors hover:text-primary" href="#">
-            {item}
-          </a>
+          <Link
+            key={item.href}
+            className="transition-colors hover:text-primary"
+            href={item.href}
+          >
+            {item.label}
+          </Link>
         ))}
       </div>
-      <div className="text-center text-[10px] uppercase tracking-[0.1em] text-on-surface-variant/50">
-        © 2024 DIGIT Trading. Plataforma Integral.
+      <div className="text-center text-[10px] uppercase tracking-[0.12em] text-on-surface-variant/50">
+        © 2026 DIGIT Trading Academy. Plataforma integral.
       </div>
     </footer>
   );

@@ -1,6 +1,6 @@
 # App Landing Home Fix DIG-8
 
-Last Updated: 2026-05-19 UTC
+Last Updated: 2026-05-25 UTC
 
 ## Summary
 
@@ -26,3 +26,4 @@ Last Updated: 2026-05-19 UTC
 - Esta note existe para cumplir el gate actual de `docs/features` y como capa compartida de trazabilidad.
 - `S00` ya dejó creados los artefactos base y esta slice implementa la primera entrega técnica del fix.
 - `S01` absorbió el trabajo originalmente planeado para `S02` y `S03` porque modularización, performance hardening y QA responsive quedaron acoplados sobre la misma superficie.
+- La rama `redesign-ui` reutiliza esa base modular para aplicar un refresh visual mobile-first inspirado por Stitch sin cambiar el modelo SSR, auth flow o session model.

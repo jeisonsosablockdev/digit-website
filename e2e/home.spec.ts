@@ -2,7 +2,26 @@ import { test, expect } from "@playwright/test";
 
 test("homepage shell renders primary CTA", async ({ page }) => {
   await page.goto("/");
-  await expect(page.getByRole("link", { name: "Empieza" })).toBeVisible();
+  await expect(page.getByText("DIGIT TRADING")).toBeVisible();
+  await expect(page.getByRole("link", { name: "Entrar a DIGIT" }).first()).toBeVisible();
+});
+
+test("homepage menu opens existing navigation links", async ({ page }) => {
+  await page.goto("/");
+
+  await page.getByLabel("Abrir navegacion").click();
+
+  await expect(page.getByRole("link", { name: "Metodo DIGIT" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Plataforma" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Membresia" })).toBeVisible();
+});
+
+test("homepage bottom navigation routes to academy", async ({ page }) => {
+  await page.goto("/");
+
+  await page.getByRole("link", { name: "Academy" }).click();
+
+  await expect(page).toHaveURL(/\/academia$/);
 });
 
 const responsiveViewports = [
@@ -19,11 +38,16 @@ for (const viewport of responsiveViewports) {
 
     await expect(
       page.getByRole("heading", {
-        name: /Construye una práctica con estructura\. Opera con criterio\./
+        name: /Conviertete en TARDER ELITE/
       })
     ).toBeVisible();
-    await expect(page.getByRole("link", { name: "Empieza" })).toBeVisible();
-    await expect(page.getByRole("button", { name: "Aplicar a DIGIT" }).first()).toBeVisible();
+    await expect(page.getByRole("link", { name: "Home" })).toBeVisible();
+    await expect(page.getByRole("link", { name: "Entrar a DIGIT" }).first()).toBeVisible();
+    await expect(
+      page.getByRole("heading", {
+        name: /Alcanza la rentabilidad conoce la arquitectura DIGIT/
+      })
+    ).toBeVisible();
 
     const hasHorizontalOverflow = await page.evaluate(() => {
       const { documentElement, body } = document;
