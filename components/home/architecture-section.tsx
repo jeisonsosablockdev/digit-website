@@ -36,28 +36,37 @@ export function ArchitectureSection() {
         </div>
         <div className="space-y-4">
           {architectureLayers.map((layer) => (
-            <article
-              key={layer.title}
-              className="rounded-lg bg-surface p-8 shadow-2xl transition-all duration-300"
-              style={{
-                background:
-                  "linear-gradient(135deg, rgba(11, 11, 18, 0.95) 0%, rgba(11, 11, 18, 0.85) 100%)",
-                boxShadow:
-                  "rgba(0, 0, 0, 0.8) 0px 10px 40px -15px, rgba(255, 255, 255, 0.05) 0px 1px 0px 0px inset"
-              }}
-            >
-              <div
-                className={`mb-6 flex h-10 w-10 items-center justify-center rounded-2xl border ${layer.iconClass}`}
+            <div key={layer.title} className="relative">
+              {(layer.title === "Performance System" || layer.title === "Library Intelligence") && (
+                <div
+                  aria-hidden="true"
+                  className={`pointer-events-none absolute inset-x-10 -bottom-6 -top-6 -z-10 rounded-full blur-[60px] ${
+                    layer.title === "Performance System" ? "bg-[#00E5FF]/18" : "bg-[#7C4DFF]/20"
+                  }`}
+                />
+              )}
+              <article
+                className="rounded-lg bg-surface p-8 shadow-2xl transition-all duration-300"
+                style={{
+                  background:
+                    "linear-gradient(135deg, rgba(11, 11, 18, 0.95) 0%, rgba(11, 11, 18, 0.85) 100%)",
+                  boxShadow:
+                    "rgba(0, 0, 0, 0.8) 0px 10px 40px -15px, rgba(255, 255, 255, 0.05) 0px 1px 0px 0px inset"
+                }}
               >
-                <Icon className="h-5 w-5" name={layer.icon} />
-              </div>
-              <h3 className="mb-3 font-headline text-xl font-bold tracking-tight text-white">
-                {layer.title}
-              </h3>
-              <p className="font-body text-sm leading-relaxed text-[#a1a1aa]">
-                {layer.description}
-              </p>
-            </article>
+                <div
+                  className={`mb-6 flex h-10 w-10 items-center justify-center rounded-2xl border ${layer.iconClass}`}
+                >
+                  <Icon className="h-5 w-5" name={layer.icon} />
+                </div>
+                <h3 className="mb-3 font-headline text-xl font-bold tracking-tight text-white">
+                  {layer.title}
+                </h3>
+                <p className="font-body text-sm leading-relaxed text-[#a1a1aa]">
+                  {layer.description}
+                </p>
+              </article>
+            </div>
           ))}
         </div>
       </div>
