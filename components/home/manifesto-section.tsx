@@ -3,7 +3,7 @@ import Link from "next/link";
 export function ManifestoSection() {
   return (
     <section
-      className="relative isolate flex flex-col items-center justify-center overflow-hidden bg-[#050505] px-6 py-24 text-center"
+      className="relative isolate flex flex-col items-center justify-center overflow-hidden bg-[#050505] px-6 py-24 text-center lg:px-8 lg:py-32"
       id="expansion-tool-section"
     >
       <div
@@ -39,8 +39,8 @@ export function ManifestoSection() {
         }}
       />
       <div className="pointer-events-none absolute bottom-12 left-1/2 z-0 h-40 w-40 -translate-x-[140%] rounded-full bg-[#7C4DFF] opacity-[0.044] blur-[75px]" />
-      <div className="relative z-10 mx-auto max-w-[24rem] md:max-w-2xl">
-        <h2 className="mb-12 font-headline text-[1.98rem] font-bold leading-[1.08] tracking-[-0.05em] text-white sm:text-4xl md:text-5xl md:tracking-tight">
+      <div className="relative z-10 mx-auto max-w-[24rem] md:max-w-2xl lg:max-w-[1100px]">
+        <h2 className="mb-12 font-headline text-[1.98rem] font-bold leading-[1.08] tracking-[-0.05em] text-white sm:text-4xl md:text-5xl md:tracking-tight lg:text-[4.5rem] lg:leading-[0.98]">
           <span className="block">El trading como</span>
           <span className="block whitespace-nowrap">
             herramienta de{" "}
@@ -50,20 +50,20 @@ export function ManifestoSection() {
           </span>
           <span className="block text-[#2ADFFF]">personal y financiera.</span>
         </h2>
-        <p className="font-body text-xl italic leading-relaxed text-[#12E7FF] md:text-2xl">
+        <p className="font-body text-xl italic leading-relaxed text-[#12E7FF] md:text-2xl lg:mx-auto lg:max-w-4xl lg:text-3xl lg:leading-[1.6]">
           "Disciplina, estructura y criterio convierten la práctica en una base de <br />{" "}
           expansión sostenida."
         </p>
       </div>
-      <div className="relative z-10 mt-12 flex w-full max-w-xs flex-col gap-4 px-6">
+      <div className="relative z-10 mt-12 flex w-full max-w-xs flex-col gap-4 px-6 lg:max-w-none lg:flex-row lg:justify-center lg:px-0">
         <Link
-          className="interactive-scale w-full rounded-full bg-gradient-to-r from-[#7c4dff] to-[#00e5ff] px-8 py-4 text-center font-headline font-bold text-black shadow-[0_0_20px_rgba(124,77,255,0.4)] transition-all"
+          className="interactive-scale w-full rounded-full bg-gradient-to-r from-[#7c4dff] to-[#00e5ff] px-8 py-4 text-center font-headline font-bold text-black shadow-[0_0_20px_rgba(124,77,255,0.4)] transition-all lg:w-auto lg:min-w-[260px] lg:px-10"
           href="/iniciar-sesion"
         >
           Entrar a DIGIT
         </Link>
         <Link
-          className="interactive-scale w-full rounded-full border border-white/10 bg-[#111111] px-8 py-4 text-center font-headline font-bold text-white transition-all hover:bg-white/5"
+          className="interactive-scale w-full rounded-full border border-white/10 bg-[#111111] px-8 py-4 text-center font-headline font-bold text-white transition-all hover:bg-white/5 lg:w-auto lg:min-w-[260px] lg:px-10"
           href="/metodo-digit"
         >
           Comienza tu entrenamiento
