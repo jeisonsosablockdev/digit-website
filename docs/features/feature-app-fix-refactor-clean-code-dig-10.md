@@ -20,8 +20,8 @@ Los objetivos conectados son:
 
 ## Active Slice
 
-- Slice: `jeisonsosablockdev/dig-10-fix-refactor-clean-code-docs`
-- Objective: dejar listos el problem artifact, el solution artifact y la trazabilidad base antes de abrir ramas hijas técnicas
+- Slice: `fix/app-refactor-clean-code-dig-10-s01-home-canonical-source`
+- Objective: dejar una sola implementación canónica de la home y retirar la implementación legacy duplicada
 
 ## Notes
 
@@ -38,3 +38,14 @@ Los objetivos conectados son:
 - Branch plan: `fix/app-refactor-clean-code-dig-10-s05-seo-performance-cwv`
 - Scope: revisar y cerrar `LCP`, `INP`, `CLS` y `TTFB` sobre la home pública después del cleanup estructural
 - Gates: `npm run validate:seo-performance`, `npm run test:e2e`, evidencia responsive y nota final por métrica
+
+## Executed Slices
+
+- `S00`
+  - Branch: `jeisonsosablockdev/dig-10-fix-refactor-clean-code-docs`
+  - Commit: `05a4e93`
+  - Result: artefactos documentales base creados
+- `S01`
+  - Branch: `fix/app-refactor-clean-code-dig-10-s01-home-canonical-source`
+  - Commit: `9e5c50f`
+  - Result: implementación legacy duplicada removida; queda una sola source of truth para la home

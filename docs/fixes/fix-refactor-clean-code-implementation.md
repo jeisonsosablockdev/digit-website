@@ -12,12 +12,13 @@ Documentation Slice: `jeisonsosablockdev/dig-10-fix-refactor-clean-code-docs`
 
 - mother branch created
 - documentation slice created
-- no implementation slices opened yet
+- `S00` completed on `jeisonsosablockdev/dig-10-fix-refactor-clean-code-docs`
+- `S01` completed on `fix/app-refactor-clean-code-dig-10-s01-home-canonical-source`
 - the current home in `develop` already includes:
   - Stitch-inspired redesign
   - client hero carousel
   - special top app bar and bottom nav outside `SiteShell`
-  - duplicated legacy home modules still present in the repo
+  - duplicated legacy home modules were the first cleanup target
 
 ## ES
 
@@ -98,8 +99,8 @@ Orden de ejecución:
 
 | Slice | Branch | Objective | Scope | Tests First | Validation | Exit Gate |
 | --- | --- | --- | --- | --- | --- | --- |
-| S00 | `jeisonsosablockdev/dig-10-fix-refactor-clean-code-docs` | Crear artefactos base y trazabilidad | `docs/fixes/*`, `docs/features/*` | No | `npm run validate:docs-governance` o `npm run validate` | Review documental aprobada |
-| S01 | `fix/app-refactor-clean-code-dig-10-s01-home-canonical-source` | Dejar una sola source of truth para la home | `app/page.tsx`, `components/home/*` | Sí | `npm run test`, `npm run build`, `npm run test:e2e` | No quedan implementaciones activas ambiguas |
+| S00 | `jeisonsosablockdev/dig-10-fix-refactor-clean-code-docs` | Crear artefactos base y trazabilidad | `docs/fixes/*`, `docs/features/*` | No | `npm run validate:docs-governance` o `npm run validate` | Completado |
+| S01 | `fix/app-refactor-clean-code-dig-10-s01-home-canonical-source` | Dejar una sola source of truth para la home | `app/page.tsx`, `components/home/*` | Sí | `npm run test`, `npm run build`, `npm run test:e2e` | Completado |
 | S02 | `fix/app-refactor-clean-code-dig-10-s02-home-composition` | Partir la home activa en componentes pequeños | `components/home/*` | Sí | `npm run test`, `npm run build`, `npm run test:e2e` | `home-page.tsx` queda como ensamblador legible |
 | S03 | `fix/app-refactor-clean-code-dig-10-s03-navigation-dedup` | Unificar menú móvil y navegación compartida | `components/home/*`, `components/site-shell.tsx` | Sí | `npm run test:e2e`, `npm run validate` | Navegación compartida sin duplicación estructural |
 | S04 | `fix/app-refactor-clean-code-dig-10-s04-behavior-contracts` | Alinear UI visible con comportamiento real | `components/home/*`, `e2e/*`, docs relacionadas si aplica | Sí | `npm run test:e2e`, `npm run validate` | No quedan CTAs o inputs con contrato ambiguo |
@@ -154,6 +155,17 @@ Si la evidencia es de laboratorio o estática, eso debe decirse explícitamente.
   - ramas slice
   - commits de cada slice
   - merge final a `develop`
+
+## Executed Traceability
+
+- `S00`
+  - branch: `jeisonsosablockdev/dig-10-fix-refactor-clean-code-docs`
+  - commit: `05a4e93`
+  - message: `docs(app): define dig-10 refactor cleanup plan`
+- `S01`
+  - branch: `fix/app-refactor-clean-code-dig-10-s01-home-canonical-source`
+  - commit: `9e5c50f`
+  - message: `refactor(app): remove duplicate legacy home implementation`
 
 ## EN
 
