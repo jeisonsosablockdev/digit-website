@@ -209,6 +209,10 @@ La evidencia final de `DIG-10` es estática/lab del repo, no field data de produ
   - branch: `fix/app-refactor-clean-code-dig-10-s04-behavior-contracts`
   - commit: `28d9df7`
   - message: `refactor(app): align home community CTA with behavior`
+- `S05`
+  - branch: `fix/app-refactor-clean-code-dig-10-s05-seo-performance-cwv`
+  - commit: `f49238e`
+  - message: `docs(app): record dig-10 cwv findings`
 
 ## EN
 

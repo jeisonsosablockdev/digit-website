@@ -61,3 +61,7 @@ Los objetivos conectados son:
   - Branch: `fix/app-refactor-clean-code-dig-10-s04-behavior-contracts`
   - Commit: `28d9df7`
   - Result: el bloque comunitario dejó de sugerir una captura falsa por email
+- `S05`
+  - Branch: `fix/app-refactor-clean-code-dig-10-s05-seo-performance-cwv`
+  - Commit: `f49238e`
+  - Result: evidencia responsive y lectura explícita de `LCP`, `INP`, `CLS` y `TTFB` quedaron documentadas
