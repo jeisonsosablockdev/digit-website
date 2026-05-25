@@ -5,7 +5,7 @@ export const heroSlides = [
     eyebrow: "Trading Elite",
     accentClass: "text-primary",
     titlePrefix: "Conviertete en",
-    titleHighlight: "TARDER ELITE",
+    titleHighlight: "TRADER ELITE",
     description:
       "Aprende a leer el mercado con claridad, entrena tu ejecución, desarrolla una mentalidad de progreso pesonal y financiero."
   },

@@ -5,7 +5,7 @@ export function MembershipSection() {
     <section className="bg-background px-6 py-20 lg:px-8 lg:py-28" id="total-access-section">
       <div className="mx-auto max-w-md lg:max-w-[1280px]">
         <div
-          className="relative overflow-hidden rounded-[2.5rem] border border-white/5 p-10 text-center shadow-2xl lg:grid lg:grid-cols-[minmax(0,1fr)_280px] lg:items-center lg:gap-10 lg:p-14 lg:text-left"
+          className="relative overflow-hidden rounded-[2.5rem] border border-white/[0.04] p-10 text-center shadow-[0_30px_90px_rgba(0,0,0,0.35),inset_0_1px_0_rgba(255,255,255,0.02)] lg:grid lg:grid-cols-[minmax(0,1fr)_280px] lg:items-center lg:gap-10 lg:p-14 lg:text-left"
           style={{
             background:
               "linear-gradient(135deg, rgba(20, 20, 25, 1) 0%, rgba(10, 10, 12, 1) 100%)"
