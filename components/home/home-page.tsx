@@ -17,9 +17,6 @@ export function HomePageSections() {
       <CommunitySection />
       <ManifestoSection />
       <MembershipSection />
-      <section className="bg-[#050505] px-6 py-20">
-        <div className="flex items-center justify-center" />
-      </section>
       <BottomNavBar />
     </div>
   );

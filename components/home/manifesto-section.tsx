@@ -6,6 +6,7 @@ export function ManifestoSection() {
       className="relative flex flex-col items-center justify-center overflow-hidden bg-[#050505] px-6 py-24 text-center"
       id="expansion-tool-section"
     >
+      <div className="pointer-events-none absolute bottom-12 left-1/2 -z-10 h-40 w-40 -translate-x-[140%] rounded-full bg-[#7C4DFF] opacity-30 blur-[75px]" />
       <div className="pointer-events-none absolute right-0 top-1/2 -z-10 -mr-32 h-[300px] w-[300px] -translate-y-1/2 rounded-full bg-[#00E5FF] opacity-20 blur-[100px]" />
       <div className="mx-auto max-w-2xl">
         <h2 className="mb-12 font-headline text-4xl font-bold leading-[1.15] tracking-tight text-white md:text-5xl">
