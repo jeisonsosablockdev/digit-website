@@ -14,6 +14,10 @@ Documentation Slice: `jeisonsosablockdev/dig-10-fix-refactor-clean-code-docs`
 - documentation slice created
 - `S00` completed on `jeisonsosablockdev/dig-10-fix-refactor-clean-code-docs`
 - `S01` completed on `fix/app-refactor-clean-code-dig-10-s01-home-canonical-source`
+- `S02` completed on `fix/app-refactor-clean-code-dig-10-s02-home-composition`
+- `S03` completed on `fix/app-refactor-clean-code-dig-10-s03-navigation-dedup`
+- `S04` completed on `fix/app-refactor-clean-code-dig-10-s04-behavior-contracts`
+- `S05` closes validation and CWV notes on `fix/app-refactor-clean-code-dig-10-s05-seo-performance-cwv`
 - the current home in `develop` already includes:
   - Stitch-inspired redesign
   - client hero carousel
@@ -101,10 +105,10 @@ Orden de ejecución:
 | --- | --- | --- | --- | --- | --- | --- |
 | S00 | `jeisonsosablockdev/dig-10-fix-refactor-clean-code-docs` | Crear artefactos base y trazabilidad | `docs/fixes/*`, `docs/features/*` | No | `npm run validate:docs-governance` o `npm run validate` | Completado |
 | S01 | `fix/app-refactor-clean-code-dig-10-s01-home-canonical-source` | Dejar una sola source of truth para la home | `app/page.tsx`, `components/home/*` | Sí | `npm run test`, `npm run build`, `npm run test:e2e` | Completado |
-| S02 | `fix/app-refactor-clean-code-dig-10-s02-home-composition` | Partir la home activa en componentes pequeños | `components/home/*` | Sí | `npm run test`, `npm run build`, `npm run test:e2e` | `home-page.tsx` queda como ensamblador legible |
-| S03 | `fix/app-refactor-clean-code-dig-10-s03-navigation-dedup` | Unificar menú móvil y navegación compartida | `components/home/*`, `components/site-shell.tsx` | Sí | `npm run test:e2e`, `npm run validate` | Navegación compartida sin duplicación estructural |
-| S04 | `fix/app-refactor-clean-code-dig-10-s04-behavior-contracts` | Alinear UI visible con comportamiento real | `components/home/*`, `e2e/*`, docs relacionadas si aplica | Sí | `npm run test:e2e`, `npm run validate` | No quedan CTAs o inputs con contrato ambiguo |
-| S05 | `fix/app-refactor-clean-code-dig-10-s05-seo-performance-cwv` | Revisar y cerrar CWV/first-load después del cleanup | `app/page.tsx`, `components/home/*`, `e2e/*`, evidence artifacts | Sí | `npm run validate:seo-performance`, `npm run test:e2e`, `npm run validate` | LCP/INP/CLS/TTFB quedan documentados y validados |
+| S02 | `fix/app-refactor-clean-code-dig-10-s02-home-composition` | Partir la home activa en componentes pequeños | `components/home/*` | Sí | `npm run test`, `npm run build`, `npm run test:e2e` | Completado |
+| S03 | `fix/app-refactor-clean-code-dig-10-s03-navigation-dedup` | Unificar menú móvil y navegación compartida | `components/home/*`, `components/site-shell.tsx` | Sí | `npm run test:e2e`, `npm run validate` | Completado |
+| S04 | `fix/app-refactor-clean-code-dig-10-s04-behavior-contracts` | Alinear UI visible con comportamiento real | `components/home/*`, `e2e/*`, docs relacionadas si aplica | Sí | `npm run test:e2e`, `npm run validate` | Completado |
+| S05 | `fix/app-refactor-clean-code-dig-10-s05-seo-performance-cwv` | Revisar y cerrar CWV/first-load después del cleanup | `app/page.tsx`, `components/home/*`, `e2e/*`, evidence artifacts | Sí | `npm run validate:seo-performance`, `npm run test:e2e`, `npm run validate` | Completado |
 
 ## Slice Dependencies And Merge Order
 
@@ -145,6 +149,33 @@ La revisión de Web Core Vitals para `DIG-10` debe registrar explícitamente:
 
 Si la evidencia es de laboratorio o estática, eso debe decirse explícitamente.
 
+## Final CWV Notes
+
+La evidencia final de `DIG-10` es estática/lab del repo, no field data de producción.
+
+- `LCP`
+  - candidato principal: hero inicial de la home, dominado por la combinación de imagen remota priorizada y heading principal
+  - estado: aceptable dentro de la arquitectura actual porque el route sigue estático y el hero mantiene `priority` solo en el primer slide
+  - riesgo residual: la imagen remota del primer slide sigue siendo el asset más sensible de la carga inicial
+- `INP`
+  - estado: controlado
+  - razón: la interactividad cliente queda acotada al `HeroCarousel`; el menú superior usa `details/summary` nativo y la navegación inferior usa links simples
+  - mejora lograda: no se expandieron límites `use client` durante el cleanup
+- `CLS`
+  - estado: bajo en evidencia de laboratorio
+  - razón: el hero reserva viewport completo, las imágenes usan `next/image` con `fill` dentro de un contenedor estable y app bar/bottom nav están fijados
+  - validación asociada: Playwright mantuvo estabilidad responsive y sin overflow horizontal
+- `TTFB`
+  - estado: estable
+  - razón: la ruta `/` sigue prerenderizada como contenido estático y el refactor no introdujo fetches ni data dependencies nuevas
+
+## Responsive Evidence
+
+- `320`: `tmp/qa/dig-10-cwv/home-320.png`
+- `375`: `tmp/qa/dig-10-cwv/home-375.png`
+- `768`: `tmp/qa/dig-10-cwv/home-768.png`
+- `1024`: `tmp/qa/dig-10-cwv/home-1024.png`
+
 ## Docs And Traceability
 
 - mantener sincronizados el problem artifact y este solution artifact
@@ -166,6 +197,18 @@ Si la evidencia es de laboratorio o estática, eso debe decirse explícitamente.
   - branch: `fix/app-refactor-clean-code-dig-10-s01-home-canonical-source`
   - commit: `9e5c50f`
   - message: `refactor(app): remove duplicate legacy home implementation`
+- `S02`
+  - branch: `fix/app-refactor-clean-code-dig-10-s02-home-composition`
+  - commit: `091c7d6`
+  - message: `refactor(app): split home into focused components`
+- `S03`
+  - branch: `fix/app-refactor-clean-code-dig-10-s03-navigation-dedup`
+  - commit: `0374344`
+  - message: `refactor(app): centralize shared mobile navigation`
+- `S04`
+  - branch: `fix/app-refactor-clean-code-dig-10-s04-behavior-contracts`
+  - commit: `28d9df7`
+  - message: `refactor(app): align home community CTA with behavior`
 
 ## EN
 

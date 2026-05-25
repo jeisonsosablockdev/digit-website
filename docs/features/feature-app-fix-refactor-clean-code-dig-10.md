@@ -20,8 +20,8 @@ Los objetivos conectados son:
 
 ## Active Slice
 
-- Slice: `fix/app-refactor-clean-code-dig-10-s01-home-canonical-source`
-- Objective: dejar una sola implementación canónica de la home y retirar la implementación legacy duplicada
+- Slice: `fix/app-refactor-clean-code-dig-10-s05-seo-performance-cwv`
+- Objective: cerrar validación final de SEO/performance, Web Core Vitals y trazabilidad completa de `DIG-10`
 
 ## Notes
 
@@ -49,3 +49,15 @@ Los objetivos conectados son:
   - Branch: `fix/app-refactor-clean-code-dig-10-s01-home-canonical-source`
   - Commit: `9e5c50f`
   - Result: implementación legacy duplicada removida; queda una sola source of truth para la home
+- `S02`
+  - Branch: `fix/app-refactor-clean-code-dig-10-s02-home-composition`
+  - Commit: `091c7d6`
+  - Result: la home activa quedó separada en componentes de responsabilidad clara
+- `S03`
+  - Branch: `fix/app-refactor-clean-code-dig-10-s03-navigation-dedup`
+  - Commit: `0374344`
+  - Result: la navegación móvil compartida quedó centralizada y reutilizable
+- `S04`
+  - Branch: `fix/app-refactor-clean-code-dig-10-s04-behavior-contracts`
+  - Commit: `28d9df7`
+  - Result: el bloque comunitario dejó de sugerir una captura falsa por email
