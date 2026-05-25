@@ -12,7 +12,7 @@ const items = [
 
 export function BottomNavBar() {
   return (
-    <nav className="fixed bottom-6 left-1/2 z-50 flex w-[90%] max-w-md -translate-x-1/2 items-center justify-around rounded-full border border-white/10 bg-glass-bg px-2 py-2 glass-effect shadow-2xl shadow-[0_0_25px_rgba(124,77,255,0.15)]">
+    <nav className="fixed bottom-6 left-1/2 z-50 flex w-[90%] max-w-md -translate-x-1/2 items-center justify-around rounded-full border border-white/10 bg-glass-bg px-2 py-2 glass-effect shadow-2xl shadow-[0_0_25px_rgba(124,77,255,0.15)] lg:hidden">
       {items.map((item) => (
         <Link
           key={item.label}
