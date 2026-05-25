@@ -29,8 +29,15 @@ Connected goals:
 
 ## Active Slice
 
-- Slice: `fix/docs-home-clean-code-and-visual-glow-polish-dig-11-s00-documentation`
-- Objective: dejar listos el problem artifact, el solution artifact y la trazabilidad base antes de abrir implementation slices
+- Slice: `fix/app-home-clean-code-and-visual-glow-polish-dig-11-s04-docs-traceability`
+- Objective: cerrar trazabilidad, evidencia y validación final después de ejecutar `S00-S03`
+
+## Executed Slices
+
+- `S00` `fix/docs-home-clean-code-and-visual-glow-polish-dig-11-s00-documentation` -> `73a9c255`
+- `S01` `fix/app-home-clean-code-and-visual-glow-polish-dig-11-s01-home-assembler-cleanup` -> `71e47e0e`
+- `S02` `fix/app-home-clean-code-and-visual-glow-polish-dig-11-s02-mobile-nav-api` -> `2c5fca84`
+- `S03` `fix/app-home-clean-code-and-visual-glow-polish-dig-11-s03-visual-glow-polish` -> `e99b8575`
 
 ## Notes
 
@@ -39,3 +46,4 @@ Connected goals:
 - Esta note existe como capa ligera de trazabilidad para cumplir el gate actual de `docs/features`.
 - The detailed problem artifact lives in `docs/fixes/fix-home-clean-code-and-visual-glow-polish.md`.
 - The implementation source of truth lives in `docs/fixes/fix-home-clean-code-and-visual-glow-polish-implementation.md`.
+- Final responsive evidence lives under `tmp/qa/dig-11-glow-polish/`.
