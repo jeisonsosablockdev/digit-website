@@ -1,7 +1,7 @@
 # Fix Implementation: Home Web Modern Layout
 
 Last Updated: 2026-05-25 UTC
-Status: in progress
+Status: implemented
 Owner: app workflow
 Related Problem Artifact: `docs/fixes/fix-home-web-modern-layout.md`
 Mother Branch: `codex/fix-home-web-modern-layout`
@@ -10,9 +10,9 @@ Documentation Slice: `codex/fix-home-web-modern-layout-s00-docs`
 ## Current State
 
 - mother branch created
-- documentation slice created
-- no implementation slices opened yet
-- the active home currently uses mobile-first app-shell composition across both mobile and desktop
+- documentation slice created and merged
+- implementation slices `S01` and `S02` merged to the mother branch
+- `S03` closes QA, CWV notes, metadata alignment, and execution traceability
 
 ## ES
 
@@ -70,6 +70,15 @@ Implementar un desktop/home web moderno que:
 - `S03` documenta resultados reales y cierra validación
 - cada slice mergea de vuelta a `codex/fix-home-web-modern-layout` antes del cierre final a `develop`
 
+## Executed Slice Traceability
+
+| Slice | Branch | Commit | Merge Back To Mother |
+| --- | --- | --- | --- |
+| S00 | `codex/fix-home-web-modern-layout-s00-docs` | `80036d07` `docs(app): define home web modern layout fix` | `5754820a` `merge: home web modern layout docs` |
+| S01 | `codex/fix-home-web-modern-layout-s01-shell-hero` | `0ee962f6` `feat(app): shift home shell and hero to web layout` | `c840686d` `merge: home web modern layout s01 shell hero` |
+| S02 | `codex/fix-home-web-modern-layout-s02-sections-desktop` | `6150eae7` `feat(app): adapt home sections for desktop web` | `a417b2b4` `merge: home web modern layout s02 sections desktop` |
+| S03 | `codex/fix-home-web-modern-layout-s03-qa-docs-closeout` | pending | pending |
+
 ## Tests-First Plan
 
 - mantener Playwright sobre home pública
@@ -83,6 +92,27 @@ Implementar un desktop/home web moderno que:
 - `S01`: `npm run test`, `npm run build`, `npm run test:e2e`
 - `S02`: `npm run test`, `npm run build`, `npm run test:e2e`
 - `S03`: `npm run validate`, `npm run validate:seo-performance`, `npm run validate:orchestration`
+
+## Responsive QA Evidence
+
+- `tmp/qa/home-web-modern-layout/home-320.png`
+- `tmp/qa/home-web-modern-layout/home-375.png`
+- `tmp/qa/home-web-modern-layout/home-768.png`
+- `tmp/qa/home-web-modern-layout/home-1024.png`
+- `tmp/qa/home-web-modern-layout/home-1440.png`
+
+## Final CWV Notes
+
+- `LCP`: el candidato principal sigue siendo hero SSR con copy e imagen ya presentes en HTML; el desktop split layout agrega estructura, no assets pesados nuevos
+- `INP`: la interactividad cliente se mantiene acotada al carrusel y a selectores ya existentes; no se agregó una capa JS nueva para desktop
+- `CLS`: hero, cards y CTA reservan espacio estable en desktop y mobile, evitando saltos perceptibles
+- `TTFB`: la home se mantiene estática/SSR-first y no introduce fetches server-side adicionales
+
+## Final Outcome
+
+- mobile conserva su shell visual, bottom nav y lectura phone-first
+- desktop ahora presenta navegación superior web, hero editorial de dos columnas y secciones internas escalables
+- la metadata de la home ya refleja el nuevo posicionamiento web moderno
 
 ## CWV And Delivery Constraints
 

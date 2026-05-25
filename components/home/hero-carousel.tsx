@@ -30,6 +30,10 @@ export function HeroCarousel() {
 
   return (
     <section className="relative overflow-hidden bg-[#050505] pt-20 lg:pt-32">
+      <h1 className="sr-only">
+        DIGIT Trading Academy - Plataforma integral para traders que buscan estructura,
+        rendimiento y comunidad
+      </h1>
       <div className="relative h-[100dvh] w-full overflow-hidden lg:hidden">
         <div
           className="flex h-full transition-transform duration-700 ease-out"
@@ -56,19 +60,11 @@ export function HeroCarousel() {
                 >
                   {slide.eyebrow}
                 </span>
-                {index === 0 ? (
-                  <h1 className="mb-4 font-headline text-4xl font-bold tracking-tight text-white">
-                    {slide.titlePrefix}
-                    <br />
-                    <span className="gradient-text-precision">{slide.titleHighlight}</span>
-                  </h1>
-                ) : (
-                  <h2 className="mb-4 font-headline text-4xl font-bold tracking-tight text-white">
-                    {slide.titlePrefix}
-                    <br />
-                    <span className="gradient-text-precision">{slide.titleHighlight}</span>
-                  </h2>
-                )}
+                <h2 className="mb-4 font-headline text-4xl font-bold tracking-tight text-white">
+                  {slide.titlePrefix}
+                  <br />
+                  <span className="gradient-text-precision">{slide.titleHighlight}</span>
+                </h2>
                 <p className="max-w-sm font-body text-base leading-relaxed text-[#a1a1aa]">
                   {slide.description}
                 </p>
@@ -113,10 +109,10 @@ export function HeroCarousel() {
             <span className={`mb-5 inline-flex rounded-full border border-white/10 bg-white/5 px-4 py-2 font-utility text-xs font-semibold uppercase tracking-[0.28em] ${activeSlide.accentClass}`}>
               {activeSlide.eyebrow}
             </span>
-            <h1 className="font-headline text-6xl font-bold leading-[0.94] tracking-[-0.06em] text-white xl:text-7xl">
+            <h2 className="font-headline text-6xl font-bold leading-[0.94] tracking-[-0.06em] text-white xl:text-7xl">
               {activeSlide.titlePrefix}
               <span className="mt-4 block gradient-text-precision">{activeSlide.titleHighlight}</span>
-            </h1>
+            </h2>
             <p className="mt-8 max-w-xl font-body text-lg leading-8 text-white/68">
               {activeSlide.description}
             </p>
