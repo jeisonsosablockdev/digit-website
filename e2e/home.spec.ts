@@ -24,6 +24,15 @@ test("homepage bottom navigation routes to academy", async ({ page }) => {
   await expect(page).toHaveURL(/\/academia$/);
 });
 
+test("homepage community section uses an honest CTA instead of fake email capture", async ({
+  page
+}) => {
+  await page.goto("/");
+
+  await expect(page.getByRole("link", { name: "Explorar recursos de la comunidad" })).toBeVisible();
+  await expect(page.getByRole("textbox")).toHaveCount(0);
+});
+
 const responsiveViewports = [
   { width: 320, height: 800 },
   { width: 375, height: 812 },
