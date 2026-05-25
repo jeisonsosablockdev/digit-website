@@ -39,3 +39,9 @@ Este fix convierte la home pública de un desktop con lenguaje de app mobile a u
 - `tmp/qa/home-web-modern-layout/home-768.png`
 - `tmp/qa/home-web-modern-layout/home-1024.png`
 - `tmp/qa/home-web-modern-layout/home-1440.png`
+
+## Follow-up Polish
+
+- branch: `codex/fix-home-web-soften-desktop-borders`
+- scope: soften bright desktop border treatments to better match the atmospheric mobile visual language
+- scope: correct hero copy from `TARDER ELITE` to `TRADER ELITE`

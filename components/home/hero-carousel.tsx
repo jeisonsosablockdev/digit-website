@@ -124,22 +124,22 @@ export function HeroCarousel() {
                 Entrar a DIGIT
               </Link>
               <Link
-                className="interactive-scale rounded-full border border-white/10 bg-white/5 px-7 py-4 font-headline text-base font-semibold text-white transition-colors hover:bg-white/10"
+                className="interactive-scale rounded-full border border-white/6 bg-white/[0.04] px-7 py-4 font-headline text-base font-semibold text-white transition-colors hover:bg-white/[0.08]"
                 href="/recursos"
               >
                 Explorar aprendizaje gratuito
               </Link>
             </div>
             <div className="mt-16 grid grid-cols-3 gap-4">
-              <div className="rounded-[1.75rem] border border-white/8 bg-white/[0.03] p-5">
+              <div className="rounded-[1.75rem] border border-white/[0.04] bg-white/[0.03] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.02)]">
                 <p className="font-headline text-3xl font-bold text-white">20k+</p>
                 <p className="mt-2 text-sm leading-6 text-white/55">Traders dentro del ecosistema DIGIT.</p>
               </div>
-              <div className="rounded-[1.75rem] border border-white/8 bg-white/[0.03] p-5">
+              <div className="rounded-[1.75rem] border border-white/[0.04] bg-white/[0.03] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.02)]">
                 <p className="font-headline text-3xl font-bold text-white">5</p>
                 <p className="mt-2 text-sm leading-6 text-white/55">Capas integradas entre academia, ejecución y comunidad.</p>
               </div>
-              <div className="rounded-[1.75rem] border border-white/8 bg-white/[0.03] p-5">
+              <div className="rounded-[1.75rem] border border-white/[0.04] bg-white/[0.03] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.02)]">
                 <p className="font-headline text-3xl font-bold text-white">24/7</p>
                 <p className="mt-2 text-sm leading-6 text-white/55">Acceso a biblioteca, plataforma y recursos del proceso.</p>
               </div>
@@ -149,7 +149,7 @@ export function HeroCarousel() {
           <div className="relative">
             <div className="pointer-events-none absolute -left-14 top-20 h-44 w-44 rounded-full bg-[#7c4dff]/20 blur-[88px]" />
             <div className="pointer-events-none absolute -right-6 bottom-16 h-52 w-52 rounded-full bg-[#00e5ff]/18 blur-[96px]" />
-            <div className="overflow-hidden rounded-[2.75rem] border border-white/10 bg-[linear-gradient(135deg,rgba(14,14,18,0.94)_0%,rgba(7,7,9,0.98)_100%)] p-5 shadow-[0_40px_120px_rgba(0,0,0,0.45)]">
+            <div className="overflow-hidden rounded-[2.75rem] border border-white/[0.04] bg-[linear-gradient(135deg,rgba(14,14,18,0.94)_0%,rgba(7,7,9,0.98)_100%)] p-5 shadow-[0_40px_120px_rgba(0,0,0,0.45),inset_0_1px_0_rgba(255,255,255,0.02)]">
               <div className="mb-5 flex items-center justify-between">
                 <div>
                   <p className="font-utility text-[11px] uppercase tracking-[0.28em] text-white/45">
@@ -174,7 +174,7 @@ export function HeroCarousel() {
                 </div>
               </div>
               <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_220px]">
-                <div className="relative min-h-[540px] overflow-hidden rounded-[2.2rem] border border-white/8 bg-black">
+                <div className="relative min-h-[540px] overflow-hidden rounded-[2.2rem] border border-white/[0.04] bg-black shadow-[inset_0_1px_0_rgba(255,255,255,0.02)]">
                   <Image
                     alt={activeSlide.titleHighlight}
                     className="object-cover opacity-90"
@@ -185,7 +185,7 @@ export function HeroCarousel() {
                   />
                   <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,5,5,0.04)_0%,rgba(5,5,5,0.14)_32%,rgba(5,5,5,0.72)_100%)]" />
                   <div className="absolute inset-x-0 bottom-0 p-7">
-                    <div className="rounded-[1.8rem] border border-white/10 bg-black/35 p-5 backdrop-blur-xl">
+                    <div className="rounded-[1.8rem] border border-white/[0.04] bg-black/35 p-5 backdrop-blur-xl shadow-[inset_0_1px_0_rgba(255,255,255,0.02)]">
                       <p className="font-utility text-[11px] uppercase tracking-[0.3em] text-secondary">
                         {activeSlide.eyebrow}
                       </p>
@@ -207,8 +207,8 @@ export function HeroCarousel() {
                         key={slide.titleHighlight}
                         className={`rounded-[1.75rem] border p-5 text-left transition-all ${
                           isActive
-                            ? "border-secondary/30 bg-secondary/10 shadow-[0_0_24px_rgba(0,229,255,0.1)]"
-                            : "border-white/8 bg-white/[0.03] hover:border-white/16 hover:bg-white/[0.05]"
+                            ? "border-secondary/20 bg-secondary/10 shadow-[0_0_24px_rgba(0,229,255,0.1),inset_0_1px_0_rgba(255,255,255,0.02)]"
+                            : "border-white/[0.04] bg-white/[0.03] shadow-[inset_0_1px_0_rgba(255,255,255,0.02)] hover:bg-white/[0.05]"
                         }`}
                         onClick={() => goToSlide(index)}
                         type="button"

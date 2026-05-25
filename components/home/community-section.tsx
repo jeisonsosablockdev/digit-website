@@ -19,7 +19,7 @@ export function CommunitySection() {
           </p>
         </div>
         <div
-          className="glass-effect relative overflow-hidden rounded-[2.5rem] border border-white/5 p-8 text-center"
+          className="glass-effect relative overflow-hidden rounded-[2.5rem] border border-white/[0.04] p-8 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.02)]"
           style={{
             background:
               "linear-gradient(135deg, rgba(15, 13, 22, 0.95) 0%, rgba(10, 10, 10, 0.95) 100%)"
@@ -40,7 +40,7 @@ export function CommunitySection() {
               {communitySignals.map((signal) => (
                 <span
                   key={signal}
-                  className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-utility font-semibold uppercase tracking-[0.18em] text-white/70"
+                  className="rounded-full border border-white/[0.04] bg-white/[0.04] px-4 py-2 text-xs font-utility font-semibold uppercase tracking-[0.18em] text-white/70"
                 >
                   {signal}
                 </span>

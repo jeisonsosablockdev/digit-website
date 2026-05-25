@@ -32,7 +32,7 @@ export function StructureSection() {
             {structureSteps.map((step, index) => (
               <div
                 key={step.title}
-                className="group relative flex items-start gap-8 lg:rounded-[2rem] lg:border lg:border-white/8 lg:bg-white/[0.03] lg:p-8 lg:shadow-[0_20px_60px_rgba(0,0,0,0.2)]"
+                className="group relative flex items-start gap-8 lg:rounded-[2rem] lg:border lg:border-white/[0.04] lg:bg-white/[0.03] lg:p-8 lg:shadow-[0_20px_60px_rgba(0,0,0,0.2),inset_0_1px_0_rgba(255,255,255,0.02)]"
               >
                 <div className="relative z-10">
                   <div
